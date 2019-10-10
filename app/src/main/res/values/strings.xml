@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Location wake up</string>
+    <string name="where_are_you_wake_up">Where are you wake up?</string>
+    <string name="city_street_country">City,Street,Country</string>
 </resources>
