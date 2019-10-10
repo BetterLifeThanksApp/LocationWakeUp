@@ -1,4 +1,4 @@
-package betterlifethanksapp.gmail.com.locationWakeUp.ui
+package betterlifethanksapp.gmail.com.locationWakeUp.ui.CurrentRoute
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -12,7 +12,8 @@ import betterlifethanksapp.gmail.com.locationWakeUp.R
 class CurrentRouteFragment : Fragment() {
 
     companion object {
-        fun newInstance() = CurrentRouteFragment()
+        fun newInstance() =
+            CurrentRouteFragment()
     }
 
     private lateinit var viewModel: CurrentRouteViewModel

@@ -1,4 +1,4 @@
-package betterlifethanksapp.gmail.com.locationWakeUp.ui
+package betterlifethanksapp.gmail.com.locationWakeUp.ui.CurrentRoute
 
 import androidx.lifecycle.ViewModel
 
