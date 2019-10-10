@@ -2,4 +2,8 @@
     <string name="app_name">Location wake up</string>
     <string name="where_are_you_wake_up">Where are you wake up?</string>
     <string name="city_street_country">City,Street,Country</string>
+    <string name="previous_destination">Previous destination:</string>
+    <string name="current_destinaton">Current Destinaton</string>
+    <string name="no_destination">no destination</string>
+    <string name="how_long">How long</string>
 </resources>
