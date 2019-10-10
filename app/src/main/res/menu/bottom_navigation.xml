@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/currentRouteFragment"
+        android:icon="@drawable/abc_vector_test"
+        android:title="Current" />
+
+    <item
+        android:id="@+id/routesFragment"
+        android:icon="@drawable/abc_vector_test"
+        android:title="Routes"/>
+
+    <item android:id="@+id/settingsFragment"
+        android:icon="@drawable/abc_vector_test"
+        android:title="Settings"/>
+
+</menu>
