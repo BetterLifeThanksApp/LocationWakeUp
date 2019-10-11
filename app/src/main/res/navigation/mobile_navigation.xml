@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/currentRouteFragment">
+
+    <fragment
+        android:id="@+id/currentRouteFragment"
+        android:name="betterlifethanksapp.gmail.com.locationWakeUp.ui.CurrentRoute.CurrentRouteFragment"
+        android:label="current_route_fragment"
+        tools:layout="@layout/current_route_fragment" />
+    <fragment
+        android:id="@+id/routesFragment"
+        android:name="betterlifethanksapp.gmail.com.locationWakeUp.ui.Routes.RoutesFragment"
+        android:label="routes_fragment"
+        tools:layout="@layout/routes_fragment" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="betterlifethanksapp.gmail.com.locationWakeUp.ui.Settings.SettingsFragment"
+        android:label="settings_fragment"
+        tools:layout="@layout/settings_fragment" />
+</navigation>
