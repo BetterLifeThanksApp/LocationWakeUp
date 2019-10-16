@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:hint="@string/city_street_country"
-        android:text=""
+        android:text="@={viewmodel.editTextLocation}"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

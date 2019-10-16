@@ -11,13 +11,16 @@ object CurrentRouteRepo {
     val currentRouteInfo:LiveData<String>
     get() = _currentRouteInfo
 
+
     init{
         _currentRouteInfo.value = "Brak info"
     }
 
 
-    fun getRouteInfo(){
-        _currentRouteInfo.value="Inne info"
+    fun getRouteInfo(text:String?){
+        if(text!=null)
+
+        _currentRouteInfo.value=text
     }
 
 }
