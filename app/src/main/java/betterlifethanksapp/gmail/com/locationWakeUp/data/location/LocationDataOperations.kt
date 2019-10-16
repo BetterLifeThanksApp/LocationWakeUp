@@ -1,5 +1,6 @@
 package betterlifethanksapp.gmail.com.locationWakeUp.data.location
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.location.*
 import androidx.core.content.getSystemService
@@ -20,13 +21,15 @@ class LocationDataOperations(val context:Context) {
         return destination
     }
 
+    @SuppressLint("MissingPermission")//TODO add permission later
     fun getMyLocation(locationListener:LocationListener):Location{
         val locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         locationManager.requestSingleUpdate(
-            "currentSingleListener",
+            LocationManager.GPS_PROVIDER,
             locationListener,
             null
         )
+        //TODO 'Location' should't be return here.It should notify other method uses listener in CurrentSingleLocationListener class
     }
 
 

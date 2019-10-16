@@ -6,7 +6,8 @@ import android.os.Bundle
 
 class CurrentSingleLocationListener:LocationListener {
     override fun onLocationChanged(location: Location?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        //we have our location.It's time to notify some listener.
+        //And this listener should run
     }
 
     override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {
