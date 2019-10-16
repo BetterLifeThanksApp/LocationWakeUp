@@ -1,4 +1,4 @@
-package betterlifethanksapp.gmail.com.locationWakeUp.ui.Routes
+package betterlifethanksapp.gmail.com.locationWakeUp.ui.settings
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -9,24 +9,24 @@ import android.view.ViewGroup
 
 import betterlifethanksapp.gmail.com.locationWakeUp.R
 
-class RoutesFragment : Fragment() {
+class SettingsFragment : Fragment() {
 
     companion object {
-        fun newInstance() = RoutesFragment()
+        fun newInstance() = SettingsFragment()
     }
 
-    private lateinit var viewModel: RoutesViewModel
+    private lateinit var viewModel: SettingsViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.routes_fragment, container, false)
+        return inflater.inflate(R.layout.settings_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(RoutesViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(SettingsViewModel::class.java)
         // TODO: Use the ViewModel
     }
 
