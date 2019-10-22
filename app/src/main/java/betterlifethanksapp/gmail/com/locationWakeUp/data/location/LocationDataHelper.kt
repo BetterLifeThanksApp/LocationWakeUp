@@ -19,7 +19,7 @@ class LocationDataHelper(val context: Context, val address:String) {
         val myLocation = locationDataOperations.getMyLocation(locationListener) //get your current location
         val destination = locationDataOperations.getDestinationLocation(address)
 
-        myLocation.distanceTo(destination)
+        //val distance = locationDataOperations.getDistance(myLocation,destination)
 
     }
 

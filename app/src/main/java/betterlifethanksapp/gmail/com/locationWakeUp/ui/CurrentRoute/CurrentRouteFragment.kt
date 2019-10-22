@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import betterlifethanksapp.gmail.com.locationWakeUp.R
+import betterlifethanksapp.gmail.com.locationWakeUp.data.location.LocationDataHelper
 
 class CurrentRouteFragment : Fragment() {
 
@@ -29,6 +30,8 @@ class CurrentRouteFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(CurrentRouteViewModel::class.java)
         // TODO: Use the ViewModel
+        val ldh = LocationDataHelper(activity!!.applicationContext,"Zlota 44,Warsaw")
+        ldh.getDistanceInfo()
     }
 
 }

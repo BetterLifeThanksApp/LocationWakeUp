@@ -8,6 +8,11 @@ class CurrentSingleLocationListener:LocationListener {
     override fun onLocationChanged(location: Location?) {
         //we have our location.It's time to notify some listener.
         //And this listener should run
+        //val locationListener:LocationEventsListener = CurrentRouteViewModel albo CurrentRouteRepository
+        //locationListener.getCurrentLocation(location)
+        val test1 = location!!.latitude
+        val test2 = location.longitude
+        val test3 = "hello"
     }
 
     override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {

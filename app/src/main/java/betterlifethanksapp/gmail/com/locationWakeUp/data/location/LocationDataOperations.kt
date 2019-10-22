@@ -21,16 +21,31 @@ class LocationDataOperations(val context:Context) {
         return destination
     }
 
+
     @SuppressLint("MissingPermission")//TODO add permission later
-    fun getMyLocation(locationListener:LocationListener):Location{
+    fun getMyLocation(locationListener:LocationListener):Location?{
+        val locationManager = getLocationManager(locationListener)
+        //TODO 'Location' should't be return here.It should notify other method uses listener in CurrentSingleLocationListener class
+        val provider = locationManager.getBestProvider(Criteria(),true)
+        locationManager.requestSingleUpdate(provider,CurrentSingleLocationListener(),null)
+        return null
+    }
+
+
+    @SuppressLint("MissingPermission")//TODO add permission later
+    private fun getLocationManager(locationListener: LocationListener):LocationManager
+    {
         val locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         locationManager.requestSingleUpdate(
             LocationManager.GPS_PROVIDER,
             locationListener,
             null
         )
-        //TODO 'Location' should't be return here.It should notify other method uses listener in CurrentSingleLocationListener class
+
+        return locationManager
     }
+
+    fun getDistance(myLocation: Location, destination: Location): Float = myLocation.distanceTo(destination)//TODO change because I don't know what kind of units do you use
 
 
 }
