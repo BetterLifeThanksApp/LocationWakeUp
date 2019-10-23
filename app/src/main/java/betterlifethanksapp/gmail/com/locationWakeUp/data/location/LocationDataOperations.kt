@@ -3,8 +3,6 @@ package betterlifethanksapp.gmail.com.locationWakeUp.data.location
 import android.annotation.SuppressLint
 import android.content.Context
 import android.location.*
-import androidx.core.content.getSystemService
-import androidx.core.location.LocationManagerCompat
 
 class LocationDataOperations(val context:Context) {
 
@@ -26,8 +24,13 @@ class LocationDataOperations(val context:Context) {
     fun getMyLocation(locationListener:LocationListener):Location?{
         val locationManager = getLocationManager(locationListener)
         //TODO 'Location' should't be return here.It should notify other method uses listener in CurrentSingleLocationListener class
-        val provider = locationManager.getBestProvider(Criteria(),true)
-        locationManager.requestSingleUpdate(provider,CurrentSingleLocationListener(),null)
+        //val provider = locationManager.getBestProvider(Criteria(),true)
+        //locationManager.requestSingleUpdate(provider,CurrentSingleLocationListener(),null)
+        locationManager.requestSingleUpdate(
+            LocationManager.GPS_PROVIDER,
+            locationListener,
+            null
+        )
         return null
     }
 
@@ -35,14 +38,8 @@ class LocationDataOperations(val context:Context) {
     @SuppressLint("MissingPermission")//TODO add permission later
     private fun getLocationManager(locationListener: LocationListener):LocationManager
     {
-        val locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        locationManager.requestSingleUpdate(
-            LocationManager.GPS_PROVIDER,
-            locationListener,
-            null
-        )
 
-        return locationManager
+        return context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
     }
 
     fun getDistance(myLocation: Location, destination: Location): Float = myLocation.distanceTo(destination)//TODO change because I don't know what kind of units do you use
