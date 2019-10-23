@@ -30,6 +30,11 @@ class CurrentRouteFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(CurrentRouteViewModel::class.java)
         // TODO: Use the ViewModel
+        getDistenceInfo()
+    }
+
+    fun getDistenceInfo()
+    {
         val ldh = LocationDataHelper(activity!!.applicationContext,"Zlota 44,Warsaw")
         ldh.getDistanceInfo()
     }

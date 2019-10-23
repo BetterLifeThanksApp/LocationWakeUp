@@ -37,4 +37,13 @@ class MainActivity : AppCompatActivity() {
         return NavigationUI.navigateUp(navController,null)
     }
 
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        //TODO Maybe run method on current use XXPermission class by uses interface
+    }
+
 }
