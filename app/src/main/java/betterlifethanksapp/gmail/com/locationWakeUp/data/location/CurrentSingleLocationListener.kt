@@ -35,8 +35,9 @@ class CurrentSingleLocationListener(val activity: Activity,val locationEventsLis
     }
 
     override fun onProviderDisabled(provider: String?) {
-        val intent = Intent(ACTION_LOCATION_SOURCE_SETTINGS)
-        activity.startActivity(intent)
+        //val intent = Intent(ACTION_LOCATION_SOURCE_SETTINGS)
+        //activity.startActivity(intent)
+        locationEventsListener.myLocaionFaliure()
     }
 
 

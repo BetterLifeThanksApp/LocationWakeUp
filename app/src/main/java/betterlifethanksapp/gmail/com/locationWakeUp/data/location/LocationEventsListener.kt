@@ -4,4 +4,5 @@ import android.location.Location
 
 interface LocationEventsListener {
     fun myLocationSuccess(location: Location)
+    fun myLocaionFaliure()
 }

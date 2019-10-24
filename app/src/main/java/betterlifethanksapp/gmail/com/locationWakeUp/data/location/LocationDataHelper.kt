@@ -13,8 +13,9 @@ class LocationDataHelper(val activity: Activity,
                          val locationDataOperations:LocationDataOperations = LocationDataOperations(activity),
                          val distanceSuccess: DistanceSuccess) :LocationEventsListener
 {
-
-
+    override fun myLocaionFaliure() {
+        distanceSuccess.locationFaliure()
+    }
 
 
     fun getDistanceInfo(){
