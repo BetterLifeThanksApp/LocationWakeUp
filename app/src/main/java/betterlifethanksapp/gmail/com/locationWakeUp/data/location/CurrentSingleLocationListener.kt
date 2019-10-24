@@ -9,34 +9,34 @@ import android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS
 import android.content.Intent
 import android.provider.Settings
 import android.R.string.cancel
+import android.app.Activity
 import android.content.DialogInterface
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat.startActivity
 import betterlifethanksapp.gmail.com.locationWakeUp.ui.MainActivity
 
 
-class CurrentSingleLocationListener:LocationListener {
+class CurrentSingleLocationListener(val activity: Activity,val locationEventsListener: LocationEventsListener):LocationListener {
     override fun onLocationChanged(location: Location?) {
         //we have our location.It's time to notify some listener.
         //And this listener should run
         //val locationListener:LocationEventsListener = CurrentRouteViewModel albo CurrentRouteRepository
         //locationListener.getCurrentLocation(location)
         val test1 = location!!.latitude
-        val test2 = location.longitude
-        val test3 = "hello"
         Log.i("Location","$test1")
+        //TODO LocationDataHelper.myLocationSuccess by interface
+        locationEventsListener.myLocationSuccess(location)
     }
 
     override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {
-
     }
 
     override fun onProviderEnabled(provider: String?) {
-
     }
 
     override fun onProviderDisabled(provider: String?) {
-        //TODO go to Location settins or display DialogBox to turn on location
+        val intent = Intent(ACTION_LOCATION_SOURCE_SETTINGS)
+        activity.startActivity(intent)
     }
 
 

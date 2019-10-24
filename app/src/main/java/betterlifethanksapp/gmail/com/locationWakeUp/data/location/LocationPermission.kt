@@ -6,16 +6,16 @@ import android.content.pm.PackageManager
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 
-class LocationPermission(val context:Context) {
+class LocationPermission(val activity: Activity) {
     companion object{
        val PERMISSION_STRING:String = android.Manifest.permission.ACCESS_FINE_LOCATION
     }
 
 
-    fun isPermissionGranted():Boolean = ContextCompat.checkSelfPermission(context, PERMISSION_STRING) == PackageManager.PERMISSION_GRANTED
+    fun isPermissionGranted():Boolean = ContextCompat.checkSelfPermission(activity.applicationContext, PERMISSION_STRING) == PackageManager.PERMISSION_GRANTED
     fun requestPermission(requestCode:Int) {
         ActivityCompat.requestPermissions(
-            context.applicationContext as Activity,
+            activity,
             arrayOf(PERMISSION_STRING),requestCode)
     }
 
