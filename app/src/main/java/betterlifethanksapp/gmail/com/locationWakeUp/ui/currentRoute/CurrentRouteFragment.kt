@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.provider.Settings
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,10 +17,15 @@ import betterlifethanksapp.gmail.com.locationWakeUp.R
 import betterlifethanksapp.gmail.com.locationWakeUp.data.location.DistanceSuccess
 import betterlifethanksapp.gmail.com.locationWakeUp.data.location.LocationDataHelper
 import kotlinx.android.synthetic.main.current_route_fragment.*
+import kotlinx.android.synthetic.main.current_route_fragment.view.*
 import java.math.RoundingMode
 import java.text.DecimalFormat
 
 class CurrentRouteFragment : Fragment(),DistanceSuccess{
+
+    private fun onButtonClicked(){
+        Toast.makeText(context,"KLIK",Toast.LENGTH_SHORT).show()
+    }
 
     override fun locationFaliure() {
         val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
@@ -40,6 +46,8 @@ class CurrentRouteFragment : Fragment(),DistanceSuccess{
         savedInstanceState: Bundle?
     ): View? {
         val v = inflater.inflate(R.layout.current_route_fragment, container, false)
+
+        v.button.setOnClickListener{onButtonClicked() }
         viewModel = ViewModelProviders.of(this).get(CurrentRouteViewModel::class.java)
         // TODO: Use the ViewModel
         getDistenceInfo()
