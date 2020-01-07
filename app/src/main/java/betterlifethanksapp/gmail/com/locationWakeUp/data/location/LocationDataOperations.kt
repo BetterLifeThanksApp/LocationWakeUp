@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.location.*
-import betterlifethanksapp.gmail.com.locationWakeUp.ui.CurrentRoute.CurrentRouteFragment
+import betterlifethanksapp.gmail.com.locationWakeUp.ui.currentRoute.CurrentRouteFragment
 
 class LocationDataOperations(val activity:Activity) {
 
