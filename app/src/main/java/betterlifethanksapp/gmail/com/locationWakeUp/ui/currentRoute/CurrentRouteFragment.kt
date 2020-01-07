@@ -40,7 +40,7 @@ class CurrentRouteFragment : Fragment(),DistanceSuccess {
         viewModel = ViewModelProviders.of(this).get(CurrentRouteViewModel::class.java)
         // TODO: Use the ViewModel
         getDistenceInfo()
-        return view
+        return inflater.inflate(R.layout.current_route_fragment, container, false)
     }
 
 
