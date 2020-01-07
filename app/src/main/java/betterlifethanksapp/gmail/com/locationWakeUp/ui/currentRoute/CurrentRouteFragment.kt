@@ -15,10 +15,12 @@ import android.widget.Toast
 import betterlifethanksapp.gmail.com.locationWakeUp.R
 import betterlifethanksapp.gmail.com.locationWakeUp.data.location.DistanceSuccess
 import betterlifethanksapp.gmail.com.locationWakeUp.data.location.LocationDataHelper
+import kotlinx.android.synthetic.main.current_route_fragment.*
 import java.math.RoundingMode
 import java.text.DecimalFormat
 
-class CurrentRouteFragment : Fragment(),DistanceSuccess {
+class CurrentRouteFragment : Fragment(),DistanceSuccess{
+
     override fun locationFaliure() {
         val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
         startActivity(intent)
@@ -37,10 +39,11 @@ class CurrentRouteFragment : Fragment(),DistanceSuccess {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val v = inflater.inflate(R.layout.current_route_fragment, container, false)
         viewModel = ViewModelProviders.of(this).get(CurrentRouteViewModel::class.java)
         // TODO: Use the ViewModel
         getDistenceInfo()
-        return inflater.inflate(R.layout.current_route_fragment, container, false)
+        return v
     }
 
 
