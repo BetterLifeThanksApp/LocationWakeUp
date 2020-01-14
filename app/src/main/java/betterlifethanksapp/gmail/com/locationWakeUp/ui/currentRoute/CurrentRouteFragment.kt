@@ -47,9 +47,17 @@ class CurrentRouteFragment : Fragment(),DistanceSuccess{
     ): View? {
         val v = inflater.inflate(R.layout.current_route_fragment, container, false)
 
-        v.button.setOnClickListener{onButtonClicked() }
         viewModel = ViewModelProviders.of(this).get(CurrentRouteViewModel::class.java)
         // TODO: Use the ViewModel
+        v.button.setOnClickListener{viewModel.onButtonClicked() }
+        /*
+        viewModel.dialogInterfaceText.observe{this, Observer { text ->
+            text?.let{
+                Toast.makeText(context,text,Toast.LENGTH_SHORT).show()
+            }
+        }}
+        */
+
         getDistenceInfo()
         return v
     }
