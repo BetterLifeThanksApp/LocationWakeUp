@@ -1,5 +1,6 @@
 package betterlifethanksapp.gmail.com.locationWakeUp.ui.currentRoute
 
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -12,6 +13,7 @@ import android.view.ViewGroup
 
 
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 
 import betterlifethanksapp.gmail.com.locationWakeUp.R
@@ -54,7 +56,18 @@ class CurrentRouteFragment : Fragment(),DistanceSuccess{
 
         viewModel.dialogInterfaceText.observe(viewLifecycleOwner, Observer { text->
             text?.let {
-                Toast.makeText(context,text,Toast.LENGTH_SHORT).show()
+                val dialogBuilder = AlertDialog.Builder(v.context)
+                    .setCancelable(false)
+                    .setPositiveButton("Tak",DialogInterface.OnClickListener{
+                        dialog,id -> Toast.makeText(context,"YEA",Toast.LENGTH_SHORT).show()
+                    })
+                    .setNegativeButton("NIE",DialogInterface.OnClickListener {
+                            dialog, which -> Toast.makeText(context,"NEIN",Toast.LENGTH_SHORT).show()
+                    })
+                val alert = dialogBuilder.create()
+                alert.setTitle("Cz ustawić budzik")
+                alert.show()
+
             }
         })
 
