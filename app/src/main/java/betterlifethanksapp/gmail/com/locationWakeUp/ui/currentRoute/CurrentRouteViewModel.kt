@@ -23,6 +23,12 @@ class CurrentRouteViewModel(application: Application) : AndroidViewModel(applica
 
 
     fun onButtonClicked(text:String?){
+
+        //1.Check location permission and check is turn on/off
+        //2.Notify fragment if turn off or if you don't let permisson yet.
+        //3.Check internet permission and check is turn on/off
+        //4.Notify fragment
+
         _dialogInterfaceText.value = "Odległość od miejsca to X km\nUstawić budzik?"
     }
 

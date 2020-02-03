@@ -70,6 +70,9 @@ class CurrentRouteFragment : Fragment(),DistanceSuccess{
         // TODO: Use the ViewModel
         v.button.setOnClickListener{viewModel.onButtonClicked(etWhere.toString()) }
 
+        //TODO
+        //Set observer internet and location checked.
+        //if something wrong,display appropriate message.
         getDistenceInfo()
         return v
     }
