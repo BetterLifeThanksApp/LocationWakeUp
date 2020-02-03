@@ -14,6 +14,14 @@ class CurrentRouteViewModel(application: Application) : AndroidViewModel(applica
     val dialogInterfaceText:LiveData<String>
         get() = _dialogInterfaceText
 
+
+    init {
+        //TODO
+        //1.Create location references
+        //2.Create Repository references with location ref in constructor
+    }
+
+
     fun onButtonClicked(text:String?){
         _dialogInterfaceText.value = "Odległość od miejsca to X km\nUstawić budzik?"
     }
