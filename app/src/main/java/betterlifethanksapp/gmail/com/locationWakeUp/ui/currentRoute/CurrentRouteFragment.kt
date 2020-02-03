@@ -67,13 +67,18 @@ class CurrentRouteFragment : Fragment(),DistanceSuccess{
 
             }
         })
+
+        viewModel.distancState.observe(viewLifecycleOwner, Observer { state->
+            if(state) displayToast(1.0f)
+            else locationFaliure()
+        })
         // TODO: Use the ViewModel
         v.button.setOnClickListener{viewModel.onButtonClicked(etWhere.toString()) }
 
         //TODO
         //Set observer internet and location checked.
         //if something wrong,display appropriate message.
-        getDistenceInfo()
+        //getDistenceInfo()
         return v
     }
 
