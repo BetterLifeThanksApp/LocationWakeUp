@@ -68,9 +68,7 @@ class CurrentRouteFragment : Fragment(),DistanceSuccess{
             }
         })
         // TODO: Use the ViewModel
-        v.button.setOnClickListener{viewModel.onButtonClicked() }
-
-
+        v.button.setOnClickListener{viewModel.onButtonClicked(etWhere.toString()) }
 
         getDistenceInfo()
         return v

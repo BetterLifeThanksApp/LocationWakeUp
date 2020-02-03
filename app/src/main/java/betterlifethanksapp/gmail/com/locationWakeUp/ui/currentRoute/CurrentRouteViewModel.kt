@@ -14,7 +14,7 @@ class CurrentRouteViewModel(application: Application) : AndroidViewModel(applica
     val dialogInterfaceText:LiveData<String>
         get() = _dialogInterfaceText
 
-    fun onButtonClicked(){
+    fun onButtonClicked(text:String?){
         _dialogInterfaceText.value = "Odległość od miejsca to X km\nUstawić budzik?"
     }
 
