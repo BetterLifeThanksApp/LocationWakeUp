@@ -1,11 +1,13 @@
 package betterlifethanksapp.gmail.com.locationWakeUp.ui.currentRoute
 
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.MutableLiveData
 
-class CurrentRouteViewModel() : ViewModel(){
+class CurrentRouteViewModel(application: Application) : AndroidViewModel(application){
 
     private val _dialogInterfaceText = MutableLiveData<String>()
 
