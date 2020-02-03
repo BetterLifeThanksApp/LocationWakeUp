@@ -51,25 +51,25 @@ class CurrentRouteFragment : Fragment(),DistanceSuccess{
         val v = inflater.inflate(R.layout.current_route_fragment, container, false)
 
         viewModel = ViewModelProviders.of(this).get(CurrentRouteViewModel::class.java)
-        // TODO: Use the ViewModel
-        v.button.setOnClickListener{viewModel.onButtonClicked() }
-
         viewModel.dialogInterfaceText.observe(viewLifecycleOwner, Observer { text->
             text?.let {
                 val dialogBuilder = AlertDialog.Builder(v.context)
                     .setCancelable(false)
                     .setPositiveButton("Tak",DialogInterface.OnClickListener{
-                        dialog,id -> Toast.makeText(context,"YEA",Toast.LENGTH_SHORT).show()
+                            dialog,id -> Toast.makeText(context,"YEA",Toast.LENGTH_SHORT).show()
                     })
                     .setNegativeButton("NIE",DialogInterface.OnClickListener {
                             dialog, which -> Toast.makeText(context,"NEIN",Toast.LENGTH_SHORT).show()
                     })
                 val alert = dialogBuilder.create()
-                alert.setTitle("Cz ustawić budzik")
+                alert.setTitle(text)
                 alert.show()
 
             }
         })
+        // TODO: Use the ViewModel
+        v.button.setOnClickListener{viewModel.onButtonClicked() }
+
 
 
         getDistenceInfo()
