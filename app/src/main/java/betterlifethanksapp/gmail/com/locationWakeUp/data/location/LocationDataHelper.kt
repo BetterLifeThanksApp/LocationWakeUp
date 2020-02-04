@@ -8,27 +8,42 @@ import android.location.Location
 import android.location.LocationListener
 import kotlinx.android.synthetic.main.activity_main.*
 
-class LocationDataHelper(val activity: Activity,
-                         val address:String,
-                         val locationDataOperations:LocationDataOperations = LocationDataOperations(activity),
-                         val distanceSuccess: DistanceSuccess) :LocationEventsListener
+class LocationDataHelper(val context: Context)
+
+                        //later user context.applicationContext()
 {
+    /*
     override fun myLocaionFaliure() {
         distanceSuccess.locationFaliure()
     }
+    */
 
 
-    fun getDistanceInfo(){
 
-        val locationListener: LocationListener = CurrentSingleLocationListener(activity,this)
+    fun getDistanceInfo(text:String){
 
-        locationDataOperations.getMyLocation(locationListener) //get your current location
+
+
+
+        //1.Check location permission and check is turn on/off
+        //2.Notify fragment if turn off or if you don't let permisson yet.
+        //3.Check internet permission and check is turn on/off
+        //4.Notify fragment
+        //repo.checkLocation
+        //repo.checkInternet
+        //repo.checkDistance
+
+
+
+        //val locationListener: LocationListener = CurrentSingleLocationListener(activity,this)
+
+      //  locationDataOperations.getMyLocation(locationListener) //get your current location
 
 
         //val distance = locationDataOperations.getDistance(myLocation,destination)
 
     }
-
+/*
     //TODO create interface and run this method if location is correct
     override fun myLocationSuccess(myLocation:Location)
     {
@@ -37,6 +52,8 @@ class LocationDataHelper(val activity: Activity,
         distanceSuccess.displayToast(distance)
 
     }
+    */
+
 
 
 

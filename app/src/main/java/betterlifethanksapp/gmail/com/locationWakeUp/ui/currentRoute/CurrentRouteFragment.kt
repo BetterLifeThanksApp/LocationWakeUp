@@ -67,6 +67,11 @@ class CurrentRouteFragment : Fragment(),DistanceSuccess{
 
             }
         })
+        viewModel.toastMessage.observe(viewLifecycleOwner, Observer { text->
+            text?.let{
+                Toast.makeText(context,text,Toast.LENGTH_LONG).show()
+            }
+        })
 
         viewModel.distancState.observe(viewLifecycleOwner, Observer { state->
             if(state) displayToast(1.0f)
@@ -85,8 +90,8 @@ class CurrentRouteFragment : Fragment(),DistanceSuccess{
 
     fun getDistenceInfo()
     {
-        val ldh = LocationDataHelper(activity!!,"Zlota 44,Warsaw",distanceSuccess = this)
-        ldh.getDistanceInfo()
+        //val ldh = LocationDataHelper(activity!!,"Zlota 44,Warsaw",distanceSuccess = this)
+        //ldh.getDistanceInfo()
     }
 
     override fun displayToast(locationdistance:Float)
