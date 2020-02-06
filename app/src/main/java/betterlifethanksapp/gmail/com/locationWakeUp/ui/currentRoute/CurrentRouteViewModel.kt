@@ -4,12 +4,10 @@ package betterlifethanksapp.gmail.com.locationWakeUp.ui.currentRoute
 import android.app.Activity
 import android.app.Application
 import android.util.Log
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.*
 import betterlifethanksapp.gmail.com.locationWakeUp.data.location.DistanceSuccess
 import betterlifethanksapp.gmail.com.locationWakeUp.data.location.LocationDataHelper
+import kotlinx.coroutines.launch
 import java.net.UnknownHostException
 
 class CurrentRouteViewModel(application: Application) : AndroidViewModel(application),DistanceSuccess{
@@ -51,12 +49,15 @@ class CurrentRouteViewModel(application: Application) : AndroidViewModel(applica
         //repo.checkLocation
         //repo.checkInternet
         //repo.checkDistance
-        try {
-            repository.getDistenceInfo(text!!)
-        }
-        catch (e: UnknownHostException){
-            _toastMessage.value =  e.message
-        }
+            viewModelScope.launch {
+                try {
+                    repository.getDistenceInfo(text!!)
+                }
+                catch (e: UnknownHostException){
+                    _toastMessage.value =  e.message
+                }
+            }
+
 
         //_dialogInterfaceText.value = "Odległość od miejsca to $distance km\nUstawić budzik?"
     }
