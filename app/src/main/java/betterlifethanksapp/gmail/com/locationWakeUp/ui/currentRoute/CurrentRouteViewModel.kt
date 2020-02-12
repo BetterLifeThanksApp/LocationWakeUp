@@ -29,11 +29,16 @@ class CurrentRouteViewModel(application: Application) : AndroidViewModel(applica
     val toastMessage:LiveData<String>
         get() = _toastMessage
 
+    private val _buttonEnabled = MutableLiveData<Boolean>()
+
+    val buttonEnabled:LiveData<Boolean>
+        get() = _buttonEnabled
+
 
     private val repository:CurrentRouteRepository
 
     init {
-        //TODO
+        _buttonEnabled.value = true
         val ldh = LocationDataHelper(application)
         val internetConnect = InternetConnect()
         repository=CurrentRouteRepository(ldh,internetConnect)
@@ -52,11 +57,15 @@ class CurrentRouteViewModel(application: Application) : AndroidViewModel(applica
         //repo.checkInternet
         //repo.checkDistance
             viewModelScope.launch {
+                _buttonEnabled.value=false
                 try {
                     repository.getDistenceInfo(text!!)
                 }
                 catch (e: UnknownHostException){
                     _toastMessage.value =  e.message
+                }
+                finally {
+                    _buttonEnabled.value = true
                 }
             }
 

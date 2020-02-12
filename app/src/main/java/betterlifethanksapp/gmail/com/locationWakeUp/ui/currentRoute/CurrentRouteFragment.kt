@@ -77,7 +77,11 @@ class CurrentRouteFragment : Fragment(),DistanceSuccess{
             if(state) displayToast(1.0f)
             else locationFaliure()
         })
-        // TODO: Use the ViewModel
+
+        viewModel.buttonEnabled.observe(viewLifecycleOwner, Observer { state->
+            button.isClickable = state
+        })
+
         v.button.setOnClickListener{viewModel.onButtonClicked(etWhere.toString()) }
 
         //TODO
