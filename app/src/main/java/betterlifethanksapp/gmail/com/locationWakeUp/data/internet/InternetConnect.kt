@@ -8,9 +8,9 @@ import java.net.InetAddress
 import java.net.UnknownHostException
 
 
-class InternetConnect {
+class InternetConnect:InternetConnectI {
 
-    suspend fun isInternetAvailable() = withContext(Dispatchers.IO){
+    override suspend fun isInternetAvailable() = withContext(Dispatchers.IO){
 
         //throw UnknownHostException("Network doesn't work correct")
 

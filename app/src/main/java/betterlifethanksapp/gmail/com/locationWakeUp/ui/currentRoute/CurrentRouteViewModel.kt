@@ -5,6 +5,7 @@ import android.app.Activity
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.*
+import betterlifethanksapp.gmail.com.locationWakeUp.data.internet.InternetConnect
 import betterlifethanksapp.gmail.com.locationWakeUp.data.location.DistanceSuccess
 import betterlifethanksapp.gmail.com.locationWakeUp.data.location.LocationDataHelper
 import kotlinx.coroutines.launch
@@ -34,7 +35,8 @@ class CurrentRouteViewModel(application: Application) : AndroidViewModel(applica
     init {
         //TODO
         val ldh = LocationDataHelper(application)
-        repository=CurrentRouteRepository(ldh)
+        val internetConnect = InternetConnect()
+        repository=CurrentRouteRepository(ldh,internetConnect)
         //1.Create location references
         //2.Create Repository references with location ref in constructor
     }
