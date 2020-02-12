@@ -7,6 +7,8 @@ import android.location.Geocoder
 import android.location.Location
 import android.location.LocationListener
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class LocationDataHelper(val context: Context)
 
@@ -18,7 +20,9 @@ class LocationDataHelper(val context: Context)
     }
     */
 
+    suspend fun checkPermissionCorrect() = withContext(Dispatchers.IO){
 
+    }
 
     fun getDistanceInfo(text:String){
 
