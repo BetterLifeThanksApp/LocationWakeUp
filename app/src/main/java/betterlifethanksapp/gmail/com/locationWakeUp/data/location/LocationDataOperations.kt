@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.location.*
+import android.util.Log
 import betterlifethanksapp.gmail.com.locationWakeUp.ui.currentRoute.CurrentRouteFragment
 
 class LocationDataOperations(val activity:Activity) {
@@ -52,6 +53,7 @@ class LocationDataOperations(val activity:Activity) {
                     //val ldh = LocationDataHelper(context,"Zlota 44,Warsaw") //TODO It's only for testing,don't use this code
                     //ldh.getDistanceInfo()
                     val siema="przyznane więc jest git"
+                    Log.i("Permission","granted")
                     val cu = CurrentRouteFragment()
                     cu.getDistenceInfo()
                 }
@@ -59,6 +61,7 @@ class LocationDataOperations(val activity:Activity) {
                 {
                     //e.g. display some notification which warning you to turn on 'location' or go to settings
                     val siema="nieprzyznane wiec zrob cos"
+                    Log.i("Permission","denied")
                 }
             }
         }

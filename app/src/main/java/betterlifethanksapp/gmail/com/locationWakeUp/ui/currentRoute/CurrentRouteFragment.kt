@@ -1,5 +1,6 @@
 package betterlifethanksapp.gmail.com.locationWakeUp.ui.currentRoute
 
+import android.Manifest
 import android.content.DialogInterface
 import android.content.Intent
 import androidx.lifecycle.ViewModelProviders
@@ -14,11 +15,13 @@ import android.view.ViewGroup
 
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat
 import androidx.lifecycle.Observer
 
 import betterlifethanksapp.gmail.com.locationWakeUp.R
 import betterlifethanksapp.gmail.com.locationWakeUp.data.location.DistanceSuccess
 import betterlifethanksapp.gmail.com.locationWakeUp.data.location.LocationDataHelper
+import betterlifethanksapp.gmail.com.locationWakeUp.ui.MainActivity
 import kotlinx.android.synthetic.main.current_route_fragment.*
 import kotlinx.android.synthetic.main.current_route_fragment.view.*
 import java.math.RoundingMode
@@ -82,6 +85,16 @@ class CurrentRouteFragment : Fragment(),DistanceSuccess{
             button.isClickable = state
         })
 
+        viewModel.permissionGranted.observe(viewLifecycleOwner, Observer { state ->
+            if(!state)
+            {
+                Log.i("Permission","invoke makeRequest in Fragment")
+                viewModel.makeRequest(this)
+                //makeRequest()
+            }
+            Log.i("Permission","end in Fragment")
+        })
+
         v.button.setOnClickListener{viewModel.onButtonClicked(etWhere.toString()) }
 
         //TODO
@@ -89,6 +102,23 @@ class CurrentRouteFragment : Fragment(),DistanceSuccess{
         //if something wrong,display appropriate message.
         //getDistenceInfo()
         return v
+    }
+/*
+    private fun makeRequest() {
+        requestPermissions()
+    }
+    */
+
+
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        Log.i("Permission","onRequstPermissionResult")
+        viewModel.onRequestPermissionsResult(requestCode,permissions,grantResults)
     }
 
 

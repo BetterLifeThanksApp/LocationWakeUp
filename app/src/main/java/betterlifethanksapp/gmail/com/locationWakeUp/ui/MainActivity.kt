@@ -2,6 +2,7 @@ package betterlifethanksapp.gmail.com.locationWakeUp.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
@@ -38,16 +39,17 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         return NavigationUI.navigateUp(navController,null)
     }
-
+/*
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        val ldh = LocationDataOperations(this)
-        ldh.onRequestPermissionResult(requestCode,permissions,grantResults)
+        //val ldh = LocationDataOperations(this)
+        //ldh.onRequestPermissionResult(requestCode,permissions,grantResults)
         //TODO Maybe run method on current use XXPermission class by uses interface
-    }
+        Log.i("Permission","onrequestPermissionResult in activity")
+    }*/
 
 }
