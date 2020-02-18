@@ -12,7 +12,9 @@ import betterlifethanksapp.gmail.com.locationWakeUp.ui.currentRoute.CurrentRoute
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class LocationDataOperations(val context: Context) {
+class LocationDataOperations(val context: Context)
+//ALWAYS USE context.applicationContext because 'context' don't work.
+{
 
 
     private val REQUEST_CODE:Int = 800
@@ -29,9 +31,9 @@ class LocationDataOperations(val context: Context) {
 
     }
 
-/*
+
     fun getDestinationLocation(address:String):Location {
-        val geocoder = Geocoder(activity.applicationContext)
+        val geocoder = Geocoder(context.applicationContext)
         val address: Address =
             geocoder.getFromLocationName(address, 1)[0]//get first element list of 'Address' class //TODO try to do something if throw exception
         val destination = Location("destination")
@@ -39,7 +41,7 @@ class LocationDataOperations(val context: Context) {
         destination.longitude = address.longitude
         return destination
     }
-    */
+
 
 
     /*

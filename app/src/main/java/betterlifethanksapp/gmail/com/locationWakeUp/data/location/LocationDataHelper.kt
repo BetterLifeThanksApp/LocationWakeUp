@@ -21,7 +21,7 @@ class LocationDataHelper(private val locationDataOperations:LocationDataOperatio
 
 
     fun estimateDistance(text: String){
-        //val destination = locationDataOperations.getDestinationLocation(text)
+        val destination = locationDataOperations.getDestinationLocation(text)
         //val myLocation = locationDataOperations.getMyLocation(locationListener)
         //locationDataOperations.getDistance(myLocation,destination)
 
