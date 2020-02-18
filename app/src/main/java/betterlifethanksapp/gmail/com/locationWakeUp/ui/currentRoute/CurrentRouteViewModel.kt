@@ -11,6 +11,7 @@ import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
 import betterlifethanksapp.gmail.com.locationWakeUp.data.internet.InternetConnect
+import betterlifethanksapp.gmail.com.locationWakeUp.data.location.CurrentSingleLocationListener
 import betterlifethanksapp.gmail.com.locationWakeUp.data.location.DistanceSuccess
 import betterlifethanksapp.gmail.com.locationWakeUp.data.location.LocationDataHelper
 import betterlifethanksapp.gmail.com.locationWakeUp.data.location.LocationDataOperations
@@ -55,7 +56,8 @@ class CurrentRouteViewModel(application: Application) : AndroidViewModel(applica
         _buttonEnabled.value = true
         _permissionGranted.value = true
         val ldo = LocationDataOperations(application)
-        val ldh = LocationDataHelper(ldo)
+        val ll = CurrentSingleLocationListener()
+        val ldh = LocationDataHelper(ldo,ll)
         val internetConnect = InternetConnect()
         repository=CurrentRouteRepository(ldh,internetConnect)
         //1.Create location references
