@@ -1,22 +1,6 @@
 package betterlifethanksapp.gmail.com.locationWakeUp.data.location
 
-import android.app.Activity
-import android.content.Context
-import android.content.pm.PackageManager
-import android.location.Address
-import android.location.Geocoder
-import android.location.Location
-import android.location.LocationListener
-import android.util.AndroidException
-import android.util.Log
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-import java.lang.Exception
-
-class LocationDataHelper(private val ldo:LocationDataOperations)
+class LocationDataHelper(private val locationDataOperations:LocationDataOperations)
 
                         //later user context.applicationContext()
 {
@@ -31,7 +15,7 @@ class LocationDataHelper(private val ldo:LocationDataOperations)
     }
 
     suspend fun checkPermissionCorrect(){
-        ldo.checkPermissionCorrect(PERMISSION_STRING)
+        locationDataOperations.checkPermissionCorrect(PERMISSION_STRING)
     }
 
 
