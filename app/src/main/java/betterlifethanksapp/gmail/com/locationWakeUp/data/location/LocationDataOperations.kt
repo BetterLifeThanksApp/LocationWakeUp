@@ -3,15 +3,33 @@ package betterlifethanksapp.gmail.com.locationWakeUp.data.location
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
+import android.content.pm.PackageManager
 import android.location.*
+import android.util.AndroidException
 import android.util.Log
+import androidx.core.content.ContextCompat
 import betterlifethanksapp.gmail.com.locationWakeUp.ui.currentRoute.CurrentRouteFragment
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
-class LocationDataOperations(val activity:Activity) {
+class LocationDataOperations(val context: Context) {
 
 
     private val REQUEST_CODE:Int = 800
 
+    suspend fun checkPermissionCorrect(permission:String) = withContext(Dispatchers.IO){
+
+        //ALWAYS USE context.applicationContext because 'context' don't work.
+        if(ContextCompat.checkSelfPermission(context.applicationContext,
+                permission
+            ) != PackageManager.PERMISSION_GRANTED)
+        {
+            throw AndroidException("No permission granted!")
+        }
+
+    }
+
+/*
     fun getDestinationLocation(address:String):Location {
         val geocoder = Geocoder(activity.applicationContext)
         val address: Address =
@@ -21,6 +39,7 @@ class LocationDataOperations(val activity:Activity) {
         destination.longitude = address.longitude
         return destination
     }
+    */
 
 
     /*
@@ -43,7 +62,7 @@ class LocationDataOperations(val activity:Activity) {
         }
     }
      */
-
+/*
     @SuppressLint("MissingPermission")
     fun getMyLocation(locationListener: LocationListener)
     {
@@ -55,7 +74,8 @@ class LocationDataOperations(val activity:Activity) {
         )
 
     }
-
+    */
+/*
     fun onRequestPermissionResult(requestCode: Int,
                                   permissions: Array<out String>,
                                   grantResults: IntArray){
@@ -81,16 +101,18 @@ class LocationDataOperations(val activity:Activity) {
         }
 
     }
+*/
 
 
-
-
+/*
     //@SuppressLint("MissingPermission")//TODO add permission later
     private fun getLocationManager(locationListener: LocationListener):LocationManager
     {
 
         return activity.applicationContext.getSystemService(Context.LOCATION_SERVICE) as LocationManager
     }
+
+ */
 
     fun getDistance(myLocation: Location, destination: Location): Float = myLocation.distanceTo(destination) * 0.001f//TODO change because I don't know what kind of units do you use
 

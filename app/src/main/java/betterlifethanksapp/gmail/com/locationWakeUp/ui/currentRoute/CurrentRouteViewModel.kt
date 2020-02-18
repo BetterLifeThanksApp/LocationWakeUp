@@ -13,6 +13,7 @@ import androidx.lifecycle.*
 import betterlifethanksapp.gmail.com.locationWakeUp.data.internet.InternetConnect
 import betterlifethanksapp.gmail.com.locationWakeUp.data.location.DistanceSuccess
 import betterlifethanksapp.gmail.com.locationWakeUp.data.location.LocationDataHelper
+import betterlifethanksapp.gmail.com.locationWakeUp.data.location.LocationDataOperations
 import kotlinx.coroutines.launch
 import java.net.UnknownHostException
 
@@ -53,7 +54,8 @@ class CurrentRouteViewModel(application: Application) : AndroidViewModel(applica
     init {
         _buttonEnabled.value = true
         _permissionGranted.value = true
-        val ldh = LocationDataHelper(application)
+        val ldo = LocationDataOperations(application)
+        val ldh = LocationDataHelper(ldo)
         val internetConnect = InternetConnect()
         repository=CurrentRouteRepository(ldh,internetConnect)
         //1.Create location references

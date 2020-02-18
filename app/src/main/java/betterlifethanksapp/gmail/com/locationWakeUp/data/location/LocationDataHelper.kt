@@ -16,7 +16,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.lang.Exception
 
-class LocationDataHelper(private val context: Context)
+class LocationDataHelper(private val ldo:LocationDataOperations)
 
                         //later user context.applicationContext()
 {
@@ -30,18 +30,8 @@ class LocationDataHelper(private val context: Context)
         private const val PERMISSION_STRING:String = android.Manifest.permission.ACCESS_FINE_LOCATION
     }
 
-    suspend fun checkPermissionCorrect() = withContext(Dispatchers.IO){
-
-
-       //val locationPermission = LocationPermission(context.applicationContext)
-        //locationPermission.isPermissionGranted(PERMISSION_STRING)
-
-            if(ContextCompat.checkSelfPermission(context.applicationContext,
-            PERMISSION_STRING) != PackageManager.PERMISSION_GRANTED)
-            {
-                throw AndroidException("No permission granted!")
-            }
-
+    suspend fun checkPermissionCorrect(){
+        ldo.checkPermissionCorrect(PERMISSION_STRING)
     }
 
 
