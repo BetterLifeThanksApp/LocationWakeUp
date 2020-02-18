@@ -16,7 +16,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.lang.Exception
 
-class LocationDataHelper(val context: Context)
+class LocationDataHelper(private val context: Context)
 
                         //later user context.applicationContext()
 {
