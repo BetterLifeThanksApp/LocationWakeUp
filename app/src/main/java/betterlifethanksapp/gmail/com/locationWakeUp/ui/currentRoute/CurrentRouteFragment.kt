@@ -95,7 +95,7 @@ class CurrentRouteFragment : Fragment(),DistanceSuccess{
             Log.i("Permission","end in Fragment")
         })
 
-        v.button.setOnClickListener{viewModel.onButtonClicked(etWhere.toString()) }
+        v.button.setOnClickListener{viewModel.onButtonClicked(etWhere.text.toString()) }
 
         //TODO
         //Set observer internet and location checked.

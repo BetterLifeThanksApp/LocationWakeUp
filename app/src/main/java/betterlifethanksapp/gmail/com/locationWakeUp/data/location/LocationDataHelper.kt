@@ -1,5 +1,7 @@
 package betterlifethanksapp.gmail.com.locationWakeUp.data.location
 
+import android.util.Log
+
 class LocationDataHelper(private val locationDataOperations:LocationDataOperations)
 
                         //later user context.applicationContext()
@@ -20,7 +22,7 @@ class LocationDataHelper(private val locationDataOperations:LocationDataOperatio
 
 
 
-    fun estimateDistance(text: String){
+    suspend fun estimateDistance(text: String){
         val destination = locationDataOperations.getDestinationLocation(text)
         //val myLocation = locationDataOperations.getMyLocation(locationListener)
         //locationDataOperations.getDistance(myLocation,destination)

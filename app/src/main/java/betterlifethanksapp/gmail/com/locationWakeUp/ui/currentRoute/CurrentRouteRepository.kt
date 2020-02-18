@@ -13,8 +13,8 @@ class CurrentRouteRepository(private val ldh:LocationDataHelper,private val inte
 
     suspend fun getDistenceInfo(text:String)
     {
-        internetConnect.isInternetAvailable()
-        ldh.checkPermissionCorrect()
-        //ldh.estimateDistance(text)
+        internetConnect.isInternetAvailable() //TODO maybe inform when you have internet access
+        ldh.checkPermissionCorrect() //TODO maybe not exception because if you grant permission(if you clicked yes on dialogbox) next method don't run ldh.estimateDistance(text) not run
+        ldh.estimateDistance(text)
     }
 }

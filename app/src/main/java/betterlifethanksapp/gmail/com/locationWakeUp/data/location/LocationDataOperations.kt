@@ -32,14 +32,14 @@ class LocationDataOperations(val context: Context)
     }
 
 
-    fun getDestinationLocation(address:String):Location {
+    suspend fun getDestinationLocation(address:String):Location =withContext(Dispatchers.IO) {
         val geocoder = Geocoder(context.applicationContext)
         val address: Address =
             geocoder.getFromLocationName(address, 1)[0]//get first element list of 'Address' class //TODO try to do something if throw exception
         val destination = Location("destination")
         destination.latitude = address.latitude
         destination.longitude = address.longitude
-        return destination
+        return@withContext destination
     }
 
 
