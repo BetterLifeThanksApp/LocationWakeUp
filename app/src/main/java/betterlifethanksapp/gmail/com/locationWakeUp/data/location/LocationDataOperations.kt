@@ -64,7 +64,7 @@ class LocationDataOperations(val context: Context)
         }
     }
      */
-/*
+
     @SuppressLint("MissingPermission")
     fun getMyLocation(locationListener: LocationListener)
     {
@@ -76,7 +76,7 @@ class LocationDataOperations(val context: Context)
         )
 
     }
-    */
+
 /*
     fun onRequestPermissionResult(requestCode: Int,
                                   permissions: Array<out String>,
@@ -106,15 +106,15 @@ class LocationDataOperations(val context: Context)
 */
 
 
-/*
+
     //@SuppressLint("MissingPermission")//TODO add permission later
     private fun getLocationManager(locationListener: LocationListener):LocationManager
     {
 
-        return activity.applicationContext.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        return context.applicationContext.getSystemService(Context.LOCATION_SERVICE) as LocationManager
     }
 
- */
+
 
     fun getDistance(myLocation: Location, destination: Location): Float = myLocation.distanceTo(destination) * 0.001f//TODO change because I don't know what kind of units do you use
 
