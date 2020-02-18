@@ -46,7 +46,12 @@ class LocationDataHelper(val context: Context)
 
 
 
+    fun estimateDistance(text: String){
+        //val destination = locationDataOperations.getDestinationLocation(text)
+        //val myLocation = locationDataOperations.getMyLocation(locationListener)
+        //locationDataOperations.getDistance(myLocation,destination)
 
+    }
 
 
     fun getDistanceInfo(text:String){
@@ -70,7 +75,6 @@ class LocationDataHelper(val context: Context)
 
 
         //val distance = locationDataOperations.getDistance(myLocation,destination)
-
     }
 /*
     //TODO create interface and run this method if location is correct

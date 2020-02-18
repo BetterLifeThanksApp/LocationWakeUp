@@ -23,6 +23,7 @@ class LocationDataOperations(val activity:Activity) {
     }
 
 
+    /*
     @SuppressLint("MissingPermission")//TODO add permission later
     fun getMyLocation(locationListener:LocationListener){
         val locationManager = getLocationManager(locationListener)
@@ -40,6 +41,19 @@ class LocationDataOperations(val activity:Activity) {
         else{
             locationPermission.requestPermission(REQUEST_CODE)
         }
+    }
+     */
+
+    @SuppressLint("MissingPermission")
+    fun getMyLocation(locationListener: LocationListener)
+    {
+        val locationManager = getLocationManager(locationListener)
+        locationManager.requestSingleUpdate(
+            LocationManager.GPS_PROVIDER,
+            locationListener,
+            null
+        )
+
     }
 
     fun onRequestPermissionResult(requestCode: Int,
