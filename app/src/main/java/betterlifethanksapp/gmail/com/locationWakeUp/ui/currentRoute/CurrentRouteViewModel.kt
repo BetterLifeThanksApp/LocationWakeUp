@@ -140,7 +140,7 @@ class CurrentRouteViewModel(application: Application) : AndroidViewModel(applica
     }
 
     override fun myLocaionFaliure() {
-        Log.i("LOCATION","faliure")
+        _toastMessage.value = "Lokalizacja wyłączona\nProszę wlącz ją\n...i kliknij pononie na przycisk :)"
     }
 
 
