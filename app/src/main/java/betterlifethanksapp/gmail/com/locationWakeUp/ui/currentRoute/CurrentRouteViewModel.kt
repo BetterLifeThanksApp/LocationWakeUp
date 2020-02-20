@@ -5,20 +5,18 @@ import android.Manifest
 import android.app.Activity
 import android.app.Application
 import android.content.pm.PackageManager
+import android.location.Location
 import android.util.AndroidException
 import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
 import betterlifethanksapp.gmail.com.locationWakeUp.data.internet.InternetConnect
-import betterlifethanksapp.gmail.com.locationWakeUp.data.location.CurrentSingleLocationListener
-import betterlifethanksapp.gmail.com.locationWakeUp.data.location.DistanceSuccess
-import betterlifethanksapp.gmail.com.locationWakeUp.data.location.LocationDataHelper
-import betterlifethanksapp.gmail.com.locationWakeUp.data.location.LocationDataOperations
+import betterlifethanksapp.gmail.com.locationWakeUp.data.location.*
 import kotlinx.coroutines.launch
 import java.net.UnknownHostException
 
-class CurrentRouteViewModel(application: Application) : AndroidViewModel(application),DistanceSuccess{
+class CurrentRouteViewModel(application: Application) : AndroidViewModel(application),DistanceSuccess,LocationEventsListener{
 
     private val _dialogInterfaceText = MutableLiveData<String>()
 
@@ -56,7 +54,7 @@ class CurrentRouteViewModel(application: Application) : AndroidViewModel(applica
         _buttonEnabled.value = true
         _permissionGranted.value = true
         val ldo = LocationDataOperations(application)
-        val ll = CurrentSingleLocationListener()
+        val ll = CurrentSingleLocationListener(this)
         val ldh = LocationDataHelper(ldo,ll)
         val internetConnect = InternetConnect()
         repository=CurrentRouteRepository(ldh,internetConnect)
@@ -133,6 +131,15 @@ class CurrentRouteViewModel(application: Application) : AndroidViewModel(applica
 
     override fun locationFaliure() {
         _distanceState.value=false
+    }
+
+    //TODO application works correctly if you manually on Location...
+    override fun myLocationSuccess(location: Location) {
+        Log.i("LOCATION","$location")
+    }
+
+    override fun myLocaionFaliure() {
+        Log.i("LOCATION","faliure")
     }
 
 

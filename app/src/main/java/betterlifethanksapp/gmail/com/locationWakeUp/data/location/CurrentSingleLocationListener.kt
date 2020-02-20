@@ -16,7 +16,7 @@ import androidx.core.content.ContextCompat.startActivity
 import betterlifethanksapp.gmail.com.locationWakeUp.ui.MainActivity
 
 
-class CurrentSingleLocationListener(val activity: Activity,val locationEventsListener: LocationEventsListener):LocationListener {
+class CurrentSingleLocationListener(val locationEventsListener: LocationEventsListener):LocationListener {
     override fun onLocationChanged(location: Location?) {
         //we have our location.It's time to notify some listener.
         //And this listener should run
