@@ -1,9 +1,10 @@
 package betterlifethanksapp.gmail.com.locationWakeUp.data.location
 
+import android.location.Location
 import android.util.Log
 
 class LocationDataHelper(private val locationDataOperations:LocationDataOperations,
-                         private val locationListener: CurrentSingleLocationListener)
+                         private val locationResult:LocationEventsListener.OnFinishedAllOperations):LocationEventsListener
 
                         //later user context.applicationContext()
 {
@@ -12,6 +13,7 @@ class LocationDataHelper(private val locationDataOperations:LocationDataOperatio
         distanceSuccess.locationFaliure()
     }
     */
+    lateinit var destination:Location
 
     companion object{
         private const val PERMISSION_STRING:String = android.Manifest.permission.ACCESS_FINE_LOCATION
@@ -24,10 +26,9 @@ class LocationDataHelper(private val locationDataOperations:LocationDataOperatio
 
 
     suspend fun estimateDistance(text: String){
-        val destination = locationDataOperations.getDestinationLocation(text)
-        val myLocation = locationDataOperations.getMyLocation(locationListener)
-        //locationDataOperations.getDistance(myLocation,destination)
-
+        destination = locationDataOperations.getDestinationLocation(text)
+        val locationListener = CurrentSingleLocationListener(this)
+        locationDataOperations.getMyLocation(locationListener)
     }
 
 
@@ -52,6 +53,15 @@ class LocationDataHelper(private val locationDataOperations:LocationDataOperatio
 
 
         //val distance = locationDataOperations.getDistance(myLocation,destination)
+    }
+
+    override fun myLocationSuccess(location: Location) {
+        val distance = locationDataOperations.getDistance(location,destination)
+        locationResult.successLocation(distance)
+    }
+
+    override fun myLocaionFaliure() {
+        locationResult.faliedLocation()
     }
 /*
     //TODO create interface and run this method if location is correct

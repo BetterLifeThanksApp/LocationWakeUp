@@ -16,7 +16,7 @@ import betterlifethanksapp.gmail.com.locationWakeUp.data.location.*
 import kotlinx.coroutines.launch
 import java.net.UnknownHostException
 
-class CurrentRouteViewModel(application: Application) : AndroidViewModel(application),DistanceSuccess,LocationEventsListener{
+class CurrentRouteViewModel(application: Application) : AndroidViewModel(application),DistanceSuccess,LocationEventsListener.OnFinishedAllOperations{
 
     private val _dialogInterfaceText = MutableLiveData<String>()
 
@@ -54,8 +54,8 @@ class CurrentRouteViewModel(application: Application) : AndroidViewModel(applica
         _buttonEnabled.value = true
         _permissionGranted.value = true
         val ldo = LocationDataOperations(application)
-        val ll = CurrentSingleLocationListener(this)
-        val ldh = LocationDataHelper(ldo,ll)
+        //val ll = CurrentSingleLocationListener(this)
+        val ldh = LocationDataHelper(ldo,this)
         val internetConnect = InternetConnect()
         repository=CurrentRouteRepository(ldh,internetConnect)
         //1.Create location references
@@ -84,6 +84,10 @@ class CurrentRouteViewModel(application: Application) : AndroidViewModel(applica
                 catch (e: AndroidException)
                 {
                     _permissionGranted.value = false
+                }
+                catch (e:IllegalStateException)
+                {
+                    _toastMessage.value = "Turn on location please :)\nAnd again click button ;)"
                 }
                 finally {
                     _buttonEnabled.value = true
@@ -134,13 +138,12 @@ class CurrentRouteViewModel(application: Application) : AndroidViewModel(applica
         _distanceState.value=false
     }
 
-    //TODO application works correctly if you manually on Location...
-    override fun myLocationSuccess(location: Location) {
-        Log.i("LOCATION","$location")
+    override fun successLocation(distance:Float){
+        Log.i("LOCATION","SUCCESS IN viewModel value is $distance")
     }
 
-    override fun myLocaionFaliure() {
-        _toastMessage.value = "Lokalizacja wyłączona\nProszę wlącz ją\n...i kliknij pononie na przycisk :)"
+    override fun faliedLocation() {
+        Log.i("LOCATION","FAILURE IN viewModel")
     }
 
 
