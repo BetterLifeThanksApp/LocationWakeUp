@@ -98,7 +98,7 @@ class CurrentRouteViewModel(application: Application) : AndroidViewModel(applica
 
 
             activity.requestPermissions(
-                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION),
                 REQUEST_CODE)
         //TODO maybe add later ACCESS_COARSE_LOCATION permission
             Log.i("Permission","let in makeRequest")
