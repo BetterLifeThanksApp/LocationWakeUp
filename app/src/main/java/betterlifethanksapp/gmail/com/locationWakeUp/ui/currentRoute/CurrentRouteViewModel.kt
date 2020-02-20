@@ -85,13 +85,10 @@ class CurrentRouteViewModel(application: Application) : AndroidViewModel(applica
                 {
                     _permissionGranted.value = false
                 }
-                catch (e:IllegalStateException)
-                {
-                    _toastMessage.value = "Turn on location please :)\nAnd again click button ;)"
-                }
                 finally {
                     _buttonEnabled.value = true
                 }
+                //TODO Now you can click button a few times.So a few operation can run.Repair it
             }
 
 
@@ -139,12 +136,12 @@ class CurrentRouteViewModel(application: Application) : AndroidViewModel(applica
     }
 
     override fun successLocation(distance:Float){
-        Log.i("LOCATION","SUCCESS IN viewModel value is $distance")
+        val tempInt:Int = distance.toInt()
+        _dialogInterfaceText.value = "Distance in straight line is around $tempInt km\nSet up alarm clock?"
     }
 
     override fun faliedLocation() {
-        Log.i("LOCATION","FAILURE IN viewModel")
+        _toastMessage.value = "Turn on location please :)\nAnd again click button ;)"
     }
-
 
 }

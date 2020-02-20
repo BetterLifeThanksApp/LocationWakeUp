@@ -65,7 +65,8 @@ class CurrentRouteFragment : Fragment(),DistanceSuccess{
                             dialog, which -> Toast.makeText(context,"NEIN",Toast.LENGTH_SHORT).show()
                     })
                 val alert = dialogBuilder.create()
-                alert.setTitle(text)
+                alert.setTitle("Did you agree?")
+                alert.setMessage(text)
                 alert.show()
 
             }
