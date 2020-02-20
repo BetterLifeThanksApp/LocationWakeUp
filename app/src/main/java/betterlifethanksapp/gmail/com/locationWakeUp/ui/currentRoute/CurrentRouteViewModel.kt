@@ -80,15 +80,13 @@ class CurrentRouteViewModel(application: Application) : AndroidViewModel(applica
                 }
                 catch (e: UnknownHostException){
                     _toastMessage.value =  e.message
+                    _buttonEnabled.value = true
                 }
                 catch (e: AndroidException)
                 {
                     _permissionGranted.value = false
-                }
-                finally {
                     _buttonEnabled.value = true
                 }
-                //TODO Now you can click button a few times.So a few operation can run.Repair it
             }
 
 
@@ -138,10 +136,12 @@ class CurrentRouteViewModel(application: Application) : AndroidViewModel(applica
     override fun successLocation(distance:Float){
         val tempInt:Int = distance.toInt()
         _dialogInterfaceText.value = "Distance in straight line is around $tempInt km\nSet up alarm clock?"
+        _buttonEnabled.value = true
     }
 
     override fun faliedLocation() {
         _toastMessage.value = "Turn on location please :)\nAnd again click button ;)"
+        _buttonEnabled.value = true
     }
 
 }
