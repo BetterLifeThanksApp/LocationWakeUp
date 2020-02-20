@@ -75,6 +75,7 @@ class CurrentRouteViewModel(application: Application) : AndroidViewModel(applica
             viewModelScope.launch {
                 _buttonEnabled.value=false
                 try {
+                    //TODO add progress circle(for waiting) and disable in myLocationSuccess() and myLocationFaliure() implemented methods :)
                     repository.getDistenceInfo(text!!)
                 }
                 catch (e: UnknownHostException){
