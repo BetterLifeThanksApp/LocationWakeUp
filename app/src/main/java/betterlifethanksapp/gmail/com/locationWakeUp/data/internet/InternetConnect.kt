@@ -16,6 +16,7 @@ class InternetConnect:InternetConnectI {
 
         try {
             InetAddress.getByName("www.google.com")
+            //TODO change this method.Sometimes isn't throw exception.Sometimes it works when you don't have internet access yes but you connect to wifi
         } catch (e: UnknownHostException) {
             throw UnknownHostException("Network doesn't work correct")
         }
