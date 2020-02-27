@@ -60,7 +60,7 @@ class CurrentRouteFragment : Fragment(),DistanceSuccess{
                 val dialogBuilder = AlertDialog.Builder(v.context)
                     .setCancelable(false)
                     .setPositiveButton("Tak",DialogInterface.OnClickListener{
-                            dialog,id -> Toast.makeText(context,"YEA",Toast.LENGTH_SHORT).show()
+                            dialog,id -> viewModel.setAlarmClockWithLocation()
                     })
                     .setNegativeButton("NIE",DialogInterface.OnClickListener {
                             dialog, which -> Toast.makeText(context,"NEIN",Toast.LENGTH_SHORT).show()

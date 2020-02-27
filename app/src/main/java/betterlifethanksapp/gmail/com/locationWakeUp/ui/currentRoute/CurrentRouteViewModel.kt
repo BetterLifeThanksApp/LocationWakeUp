@@ -113,6 +113,12 @@ class CurrentRouteViewModel(application: Application) : AndroidViewModel(applica
         //_dialogInterfaceText.value = "Odległość od miejsca to $distance km\nUstawić budzik?"
     }
 
+
+    fun setAlarmClockWithLocation()
+    {
+        _toastMessage.value = "YEA"
+    }
+
     fun makeRequest(activity: Fragment) {
         Log.i("Permission","makeRequest()")
 
