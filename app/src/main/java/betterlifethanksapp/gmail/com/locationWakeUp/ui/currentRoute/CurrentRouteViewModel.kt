@@ -44,6 +44,11 @@ class CurrentRouteViewModel(application: Application) : AndroidViewModel(applica
     val permissionGranted:LiveData<Boolean>
         get() = _permissionGranted
 
+    private val _isProgressBarVisible = MutableLiveData<Boolean>()
+
+    val isProgressBarVisible:LiveData<Boolean>
+            get() = _isProgressBarVisible
+
     private val REQUEST_CODE = 984
 
 
@@ -74,18 +79,19 @@ class CurrentRouteViewModel(application: Application) : AndroidViewModel(applica
         //repo.checkDistance
             viewModelScope.launch {
                 _buttonEnabled.value=false
+                _isProgressBarVisible.value = true
                 try {
                     //TODO add progress circle(for waiting) and disable in myLocationSuccess() and myLocationFaliure() implemented methods :)
                     repository.getDistenceInfo(text!!)
                 }
                 catch (e: UnknownHostException){
                     _toastMessage.value =  e.message
-                    _buttonEnabled.value = true
+                    enableButtonDisableProgressBar()
                 }
                 catch (e: AndroidException)
                 {
                     _permissionGranted.value = false
-                    _buttonEnabled.value = true
+                    enableButtonDisableProgressBar()
                 }
             }
 
@@ -136,12 +142,17 @@ class CurrentRouteViewModel(application: Application) : AndroidViewModel(applica
     override fun successLocation(distance:Float){
         val tempInt:Int = distance.toInt()
         _dialogInterfaceText.value = "Distance in straight line is around $tempInt km\nSet up alarm clock?"
-        _buttonEnabled.value = true
+        enableButtonDisableProgressBar()
     }
 
     override fun faliedLocation() {
         _toastMessage.value = "Turn on location please :)\nAnd again click button ;)"
+        enableButtonDisableProgressBar()
+    }
+
+    private fun enableButtonDisableProgressBar(){
         _buttonEnabled.value = true
+        _isProgressBarVisible.value = false
     }
 
 }

@@ -16,6 +16,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 
 import betterlifethanksapp.gmail.com.locationWakeUp.R
@@ -94,6 +95,17 @@ class CurrentRouteFragment : Fragment(),DistanceSuccess{
                 //makeRequest()
             }
             Log.i("Permission","end in Fragment")
+        })
+
+        viewModel.isProgressBarVisible.observe(viewLifecycleOwner, Observer { state->
+            if(state)
+            {
+                progressBar.visibility=View.VISIBLE
+            }
+            else
+            {
+                progressBar.visibility = View.GONE
+            }
         })
 
         v.button.setOnClickListener{viewModel.onButtonClicked(etWhere.text.toString()) }
