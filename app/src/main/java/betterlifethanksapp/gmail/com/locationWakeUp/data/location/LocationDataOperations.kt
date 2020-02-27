@@ -66,7 +66,7 @@ class LocationDataOperations(val context: Context)
      */
 
     @SuppressLint("MissingPermission")
-    fun getMyLocation(locationListener: LocationListener)
+    fun getMySingleLocation(locationListener: LocationListener)
     {
         val locationManager = getLocationManager(locationListener)
         locationManager.requestSingleUpdate(
