@@ -19,7 +19,7 @@ import java.lang.Exception
 import java.lang.IllegalArgumentException
 import java.net.UnknownHostException
 
-class CurrentRouteViewModel(application: Application) : AndroidViewModel(application),DistanceSuccess,LocationEventsListener.OnFinishedAllOperations{
+class CurrentRouteViewModel(application: Application) : AndroidViewModel(application),LocationEventsListener.OnFinishedAllOperations{
 
     private val _dialogInterfaceText = MutableLiveData<String>()
 
@@ -152,7 +152,7 @@ class CurrentRouteViewModel(application: Application) : AndroidViewModel(applica
         }
     }
 
-
+/*
 
     override fun displayToast(text: Float) {
         _distanceState.value=true
@@ -161,6 +161,8 @@ class CurrentRouteViewModel(application: Application) : AndroidViewModel(applica
     override fun locationFaliure() {
         _distanceState.value=false
     }
+    */
+
 
     override fun successLocation(distance:Float){
         val tempInt:Int = distance.toInt()
