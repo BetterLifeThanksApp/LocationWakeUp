@@ -117,6 +117,8 @@ class CurrentRouteViewModel(application: Application) : AndroidViewModel(applica
     fun setAlarmClockWithLocation()
     {
         _toastMessage.value = "YEA"
+        //TODO get location and send to repository and set the alarm when you are e.g. 2km from this location
+        //TODO maybe first save location somewhere.Maybe return location in successLocation and save into val.If you click yes in dialogbox then I save into database(e.g 'Room') if I click no save variable to null
     }
 
     fun makeRequest(activity: Fragment) {
