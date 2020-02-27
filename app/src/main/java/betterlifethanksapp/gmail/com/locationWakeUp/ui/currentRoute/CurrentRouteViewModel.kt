@@ -14,6 +14,9 @@ import androidx.lifecycle.*
 import betterlifethanksapp.gmail.com.locationWakeUp.data.internet.InternetConnect
 import betterlifethanksapp.gmail.com.locationWakeUp.data.location.*
 import kotlinx.coroutines.launch
+import java.io.IOException
+import java.lang.Exception
+import java.lang.IllegalArgumentException
 import java.net.UnknownHostException
 
 class CurrentRouteViewModel(application: Application) : AndroidViewModel(application),DistanceSuccess,LocationEventsListener.OnFinishedAllOperations{
@@ -92,6 +95,17 @@ class CurrentRouteViewModel(application: Application) : AndroidViewModel(applica
                 {
                     _permissionGranted.value = false
                     enableButtonDisableProgressBar()
+                }
+                catch(e:Exception)
+                {
+                    when(e){
+                        is IllegalArgumentException,is IOException->{
+                            _toastMessage.value = "I couldn't find destination address:(\nPlease try enter another location"
+                            enableButtonDisableProgressBar()
+                        }
+
+                    }
+
                 }
             }
 
