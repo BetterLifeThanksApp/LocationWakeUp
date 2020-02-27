@@ -19,4 +19,8 @@ class CurrentRouteRepository(private val ldh:LocationDataHelper,private val inte
         ldh.checkPermissionCorrect() //TODO maybe not exception because if you grant permission(if you clicked yes on dialogbox) next method don't run ldh.estimateDistance(text) not run
         ldh.estimateDistance(text)
     }
+
+    fun setAlarmClockWithLocation() {
+        Log.i("LOCATION DESTINATION","${ldh.destination.latitude} and ${ldh.destination.longitude}")
+    }
 }
