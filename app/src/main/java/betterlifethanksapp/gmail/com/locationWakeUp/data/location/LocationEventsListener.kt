@@ -4,10 +4,14 @@ import android.location.Location
 
 interface LocationEventsListener {
 
-    interface OnFinishedAllOperations
+    interface OnFinishedLocationSingleOperations
     {
-        fun successLocation(distance:Float)
-        fun faliedLocation()
+        fun successSingleLocation(distance:Float)
+        fun failedSingleLocation()
+        interface OnFinishedSingleLocationVm{
+            fun successSingleLocation(distance:Float)
+            fun failedSingleLocation()
+        }
     }
 
     fun myLocationSuccess(location: Location)

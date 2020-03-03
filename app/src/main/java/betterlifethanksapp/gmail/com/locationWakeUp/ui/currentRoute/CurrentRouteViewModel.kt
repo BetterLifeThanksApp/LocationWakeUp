@@ -2,13 +2,10 @@ package betterlifethanksapp.gmail.com.locationWakeUp.ui.currentRoute
 
 
 import android.Manifest
-import android.app.Activity
 import android.app.Application
 import android.content.pm.PackageManager
-import android.location.Location
 import android.util.AndroidException
 import android.util.Log
-import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
 import betterlifethanksapp.gmail.com.locationWakeUp.data.internet.InternetConnect
@@ -19,7 +16,9 @@ import java.lang.Exception
 import java.lang.IllegalArgumentException
 import java.net.UnknownHostException
 
-class CurrentRouteViewModel(application: Application) : AndroidViewModel(application),LocationEventsListener.OnFinishedAllOperations{
+class CurrentRouteViewModel(application: Application)
+    : AndroidViewModel(application),
+    LocationEventsListener.OnFinishedLocationSingleOperations.OnFinishedSingleLocationVm{
 
     private val _dialogInterfaceText = MutableLiveData<String>()
 
@@ -61,11 +60,8 @@ class CurrentRouteViewModel(application: Application) : AndroidViewModel(applica
     init {
         _buttonEnabled.value = true
         _permissionGranted.value = true
-        val ldo = LocationDataOperations(application)
+        repository = CurrentRouteRepository(application,this)
         //val ll = CurrentSingleLocationListener(this)
-        val ldh = LocationDataHelper(ldo,this)
-        val internetConnect = InternetConnect()
-        repository=CurrentRouteRepository(ldh,internetConnect)
         //1.Create location references
         //2.Create Repository references with location ref in constructor
     }
@@ -80,6 +76,7 @@ class CurrentRouteViewModel(application: Application) : AndroidViewModel(applica
         //repo.checkLocation
         //repo.checkInternet
         //repo.checkDistance
+
             viewModelScope.launch {
                 _buttonEnabled.value=false
                 _isProgressBarVisible.value = true
@@ -164,13 +161,13 @@ class CurrentRouteViewModel(application: Application) : AndroidViewModel(applica
     */
 
 
-    override fun successLocation(distance:Float){
+    override fun successSingleLocation(distance:Float){
         val tempInt:Int = distance.toInt()
         _dialogInterfaceText.value = "Distance in straight line is around $tempInt km\nSet up alarm clock?"
         enableButtonDisableProgressBar()
     }
 
-    override fun faliedLocation() {
+    override fun failedSingleLocation() {
         _toastMessage.value = "Turn on location please :)\nAnd again click button ;)"
         enableButtonDisableProgressBar()
     }

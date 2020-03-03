@@ -3,7 +3,7 @@ package betterlifethanksapp.gmail.com.locationWakeUp.data.location
 import android.location.Location
 
 class LocationDataHelper(private val locationDataOperations:LocationDataOperations,
-                         private val locationResult:LocationEventsListener.OnFinishedAllOperations):LocationEventsListener
+                         private val locationResult:LocationEventsListener.OnFinishedLocationSingleOperations):LocationEventsListener
 
                         //later user context.applicationContext()
 {
@@ -56,11 +56,11 @@ class LocationDataHelper(private val locationDataOperations:LocationDataOperatio
 
     override fun myLocationSuccess(location: Location) {
         val distance = locationDataOperations.getDistance(location,destination)
-        locationResult.successLocation(distance)
+        locationResult.successSingleLocation(distance)
     }
 
     override fun myLocaionFaliure() {
-        locationResult.faliedLocation()
+        locationResult.failedSingleLocation()
     }
 /*
     //TODO create interface and run this method if location is correct
