@@ -36,7 +36,8 @@ class CurrentRouteRepository(val context: Context,
         ldh.estimateDistance(text)
     }
 
-    fun setAlarmClockWithLocation() {
+    suspend fun setAlarmClockWithLocation() {
+        ldh.launchLocationRequests()
         Log.i("LOCATION DESTINATION","${ldh.destination.latitude} and ${ldh.destination.longitude}")
     }
 

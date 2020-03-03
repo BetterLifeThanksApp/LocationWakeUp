@@ -42,6 +42,11 @@ class LocationDataOperations(val context: Context)
         return@withContext destination
     }
 
+    fun createLocationRequest(){
+        //create LocationRequest
+        //https://developer.android.com/training/location/change-location-settings#kotlin
+    }
+
 
 
     /*

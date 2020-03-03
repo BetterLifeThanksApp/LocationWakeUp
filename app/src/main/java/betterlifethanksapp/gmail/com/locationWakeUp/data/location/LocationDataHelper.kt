@@ -1,6 +1,8 @@
 package betterlifethanksapp.gmail.com.locationWakeUp.data.location
 
 import android.location.Location
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class LocationDataHelper(private val locationDataOperations:LocationDataOperations,
                          private val locationResult:LocationEventsListener.OnFinishedLocationSingleOperations):LocationEventsListener
@@ -13,6 +15,7 @@ class LocationDataHelper(private val locationDataOperations:LocationDataOperatio
     }
     */
     lateinit var destination:Location
+    lateinit var currentLocation:Location
 
     companion object{
         private const val PERMISSION_STRING:String = android.Manifest.permission.ACCESS_FINE_LOCATION
@@ -22,6 +25,9 @@ class LocationDataHelper(private val locationDataOperations:LocationDataOperatio
         locationDataOperations.checkPermissionCorrect(PERMISSION_STRING)
     }
 
+    suspend fun launchLocationRequests() = withContext(Dispatchers.IO){
+        locationDataOperations.createLocationRequest()
+    }
 
 
     suspend fun estimateDistance(text: String){
