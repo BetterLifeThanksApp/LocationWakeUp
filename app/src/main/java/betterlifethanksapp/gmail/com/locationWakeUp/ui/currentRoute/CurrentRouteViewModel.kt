@@ -76,7 +76,7 @@ class CurrentRouteViewModel(application: Application)
         //repo.checkLocation
         //repo.checkInternet
         //repo.checkDistance
-
+            //TODO I can click in button 2 times(if i click fast) and I see 2x dialogBox :(
             viewModelScope.launch {
                 _buttonEnabled.value=false
                 _isProgressBarVisible.value = true
