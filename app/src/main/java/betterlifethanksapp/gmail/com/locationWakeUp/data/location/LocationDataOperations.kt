@@ -5,11 +5,13 @@ import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
 import android.location.*
+import android.location.LocationListener
 import android.util.AndroidException
 import android.util.Log
 import androidx.core.content.ContextCompat
 import betterlifethanksapp.gmail.com.locationWakeUp.ui.currentRoute.CurrentRouteFragment
-import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.*
+import com.google.android.gms.tasks.Task
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -53,6 +55,31 @@ class LocationDataOperations(val context: Context)
             priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         }
         //https://developer.android.com/training/location/change-location-settings#kotlin
+    }
+
+    fun createSettingsBuilder(){
+        val builder = LocationSettingsRequest.Builder()
+
+        val client:SettingsClient = LocationServices.getSettingsClient(context.applicationContext)
+        val task: Task<LocationSettingsResponse> = client.
+            checkLocationSettings(builder.build())
+        task.addOnSuccessListener { locationSettingsResponse ->
+            //Get locationrequest here.
+            Log.i("LocationGoogle","Settings success")
+        }
+        task.addOnFailureListener { exception ->
+            Log.i("LocationGoogle","Settings failed")
+            /*
+            try {
+            // Show the dialog by calling startResolutionForResult(),
+            // and check the result in onActivityResult().
+            exception.startResolutionForResult(this@MainActivity,
+                    REQUEST_CHECK_SETTINGS)
+        } catch (sendEx: IntentSender.SendIntentException) {
+            // Ignore the error.
+        }
+             */
+        }
     }
 
 

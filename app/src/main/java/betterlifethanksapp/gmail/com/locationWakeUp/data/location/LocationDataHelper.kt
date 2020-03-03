@@ -27,6 +27,7 @@ class LocationDataHelper(private val locationDataOperations:LocationDataOperatio
 
     suspend fun launchLocationRequests() = withContext(Dispatchers.IO){
         locationDataOperations.createLocationRequest()
+        locationDataOperations.createSettingsBuilder()
     }
 
 
