@@ -22,6 +22,8 @@ class LocationDataOperations(val context: Context)
 
     private val REQUEST_CODE:Int = 800
     private var locationRequest:LocationRequest? = null
+    private lateinit var locationCallback: LocationCallback
+
 
 
     suspend fun checkPermissionCorrect(permission:String) = withContext(Dispatchers.IO){
@@ -80,6 +82,28 @@ class LocationDataOperations(val context: Context)
         }
              */
         }
+    }
+
+    fun startLocationUpdated(){
+
+        locationCallback = object :LocationCallback(){
+            override fun onLocationResult(locationResult: LocationResult?) {
+                locationResult ?: return
+                for(location in locationResult.locations){
+                    Log.i("LocationGoogle","${location.longitude} + ${location.latitude}")
+                }
+            }
+        }
+
+        val fusedLocationClient = LocationServices.getFusedLocationProviderClient(context.applicationContext)
+        fusedLocationClient.requestLocationUpdates(
+            locationRequest,
+            locationCallback,
+            null
+        )
+
+
+
     }
 
 
