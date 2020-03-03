@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.location.*
 import android.location.LocationListener
+import android.os.Looper
 import android.util.AndroidException
 import android.util.Log
 import androidx.core.content.ContextCompat
@@ -99,7 +100,7 @@ class LocationDataOperations(val context: Context)
         fusedLocationClient.requestLocationUpdates(
             locationRequest,
             locationCallback,
-            null
+            Looper.getMainLooper()//TODO read more about this
         )
 
 
