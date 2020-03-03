@@ -9,6 +9,7 @@ import android.util.AndroidException
 import android.util.Log
 import androidx.core.content.ContextCompat
 import betterlifethanksapp.gmail.com.locationWakeUp.ui.currentRoute.CurrentRouteFragment
+import com.google.android.gms.location.LocationRequest
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -18,6 +19,8 @@ class LocationDataOperations(val context: Context)
 
 
     private val REQUEST_CODE:Int = 800
+    private var locationRequest:LocationRequest? = null
+
 
     suspend fun checkPermissionCorrect(permission:String) = withContext(Dispatchers.IO){
 
@@ -44,6 +47,11 @@ class LocationDataOperations(val context: Context)
 
     fun createLocationRequest(){
         //create LocationRequest
+        locationRequest = LocationRequest.create()?.apply {
+            interval = 10000
+            fastestInterval = 5000
+            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        }
         //https://developer.android.com/training/location/change-location-settings#kotlin
     }
 
