@@ -62,12 +62,12 @@ class LocationDataHelper(private val locationDataOperations:LocationDataOperatio
         //val distance = locationDataOperations.getDistance(myLocation,destination)
     }
 
-    override fun myLocationSuccess(location: Location) {
+    override fun mySingleLocationSuccess(location: Location) {
         val distance = locationDataOperations.getDistance(location,destination)
         locationResult.successSingleLocation(distance)
     }
 
-    override fun myLocaionFaliure() {
+    override fun mySingleLocationFailure() {
         locationResult.failedSingleLocation()
     }
 /*

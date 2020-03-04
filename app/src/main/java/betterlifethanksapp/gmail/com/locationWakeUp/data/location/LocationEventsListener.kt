@@ -14,6 +14,6 @@ interface LocationEventsListener {
         }
     }
 
-    fun myLocationSuccess(location: Location)
-    fun myLocaionFaliure()
+    fun mySingleLocationSuccess(location: Location)
+    fun mySingleLocationFailure()
 }
