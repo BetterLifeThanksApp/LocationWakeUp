@@ -15,7 +15,6 @@ class LocationDataHelper(private val locationDataOperations:LocationDataOperatio
     }
     */
     lateinit var destination:Location
-    lateinit var currentLocation:Location
 
     companion object{
         private const val PERMISSION_STRING:String = android.Manifest.permission.ACCESS_FINE_LOCATION
@@ -26,7 +25,7 @@ class LocationDataHelper(private val locationDataOperations:LocationDataOperatio
     }
 
     suspend fun launchLocationRequests() = withContext(Dispatchers.IO){
-        locationDataOperations.createLocationRequest()
+        locationDataOperations.createLocationRequest(this@LocationDataHelper)
         locationDataOperations.createSettingsBuilder()
         locationDataOperations.startLocationUpdated()
     }
@@ -69,6 +68,15 @@ class LocationDataHelper(private val locationDataOperations:LocationDataOperatio
 
     override fun mySingleLocationFailure() {
         locationResult.failedSingleLocation()
+    }
+
+    override fun multipleLocationSuccess(currentLocation: Location) {
+        val distance = locationDataOperations.getDistance(currentLocation,destination)
+        locationResult.successMultipleLocation(distance)
+    }
+
+    override fun multipleLocationFailure() {
+        //TODO //HANDLE THIS LATER...
     }
 /*
     //TODO create interface and run this method if location is correct

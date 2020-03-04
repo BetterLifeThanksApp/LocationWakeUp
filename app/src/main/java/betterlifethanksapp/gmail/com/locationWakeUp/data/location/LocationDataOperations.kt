@@ -24,6 +24,7 @@ class LocationDataOperations(val context: Context)
     private val REQUEST_CODE:Int = 800
     private var locationRequest:LocationRequest? = null
     private lateinit var locationCallback: LocationCallback
+    private lateinit var multipleEventsListener: LocationEventsListener
 
 
 
@@ -50,7 +51,8 @@ class LocationDataOperations(val context: Context)
         return@withContext destination
     }
 
-    fun createLocationRequest(){
+    fun createLocationRequest(eventsListener: LocationEventsListener){
+        multipleEventsListener = eventsListener
         //create LocationRequest
         locationRequest = LocationRequest.create()?.apply {
             interval = 10000
@@ -92,6 +94,7 @@ class LocationDataOperations(val context: Context)
                 locationResult ?: return
                 for(location in locationResult.locations){
                     Log.i("LocationGoogle","${location.longitude} + ${location.latitude}")
+                    multipleEventsListener.multipleLocationSuccess(location)
                 }
             }
         }

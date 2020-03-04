@@ -34,6 +34,7 @@ class CurrentRouteRepository(val context: Context,
         internetConnect.isInternetAvailable() //TODO maybe inform when you have internet access
         ldh.checkPermissionCorrect() //TODO maybe not exception because if you grant permission(if you clicked yes on dialogbox) next method don't run ldh.estimateDistance(text) not run
         ldh.estimateDistance(text)
+        //TODO waiting for location is long (sometimes 8 sec) maybe use google services location or maybe use location.bestProviderLocation or use location from internet
     }
 
     suspend fun setAlarmClockWithLocation() {
@@ -47,5 +48,22 @@ class CurrentRouteRepository(val context: Context,
 
     override fun failedSingleLocation() {
         callbackListener.failedSingleLocation()
+    }
+
+    override fun successMultipleLocation(distance: Float) {
+        Log.i("distance","$distance")
+        if(distance <=3.0f)//TODO 3.0 is temporary. In future I'll check value saved into memory and check if distance to destination is <3km I wake up the user.
+        {
+            wakeUpNow()
+        }
+    }
+
+    private fun wakeUpNow() {
+        Log.i("Wake up","WAKE UP")
+
+    }
+
+    override fun failedMultipleLocation() {
+        //handle this later //TODO
     }
 }

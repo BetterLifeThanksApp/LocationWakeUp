@@ -76,6 +76,7 @@ class CurrentRouteViewModel(application: Application)
         //repo.checkLocation
         //repo.checkInternet
         //repo.checkDistance
+        //TODO this works only if i use this fragment(becauce I use thisFragmentViewModelScope
             //TODO I can click in button 2 times(if i click fast) and I see 2x dialogBox :(
             viewModelScope.launch {
                 _buttonEnabled.value=false

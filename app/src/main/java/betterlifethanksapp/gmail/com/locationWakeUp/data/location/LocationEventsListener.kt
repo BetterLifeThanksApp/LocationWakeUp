@@ -12,8 +12,14 @@ interface LocationEventsListener {
             fun successSingleLocation(distance:Float)
             fun failedSingleLocation()
         }
+        fun successMultipleLocation(distance:Float)
+        fun failedMultipleLocation()
+
     }
 
     fun mySingleLocationSuccess(location: Location)
     fun mySingleLocationFailure()
+
+    fun multipleLocationSuccess(location: Location)
+    fun multipleLocationFailure()
 }
