@@ -84,7 +84,7 @@ class LocationDataHelper(private val locationDataOperations:LocationDataOperatio
         //TODO //HANDLE THIS LATER...
     }
 /*
-    //TODO create interface and run this method if location is correct
+    //create interface and run this method if location is correct
     override fun myLocationSuccess(myLocation:Location)
     {
         val destination = locationDataOperations.getDestinationLocation(address)

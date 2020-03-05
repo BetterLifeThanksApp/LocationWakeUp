@@ -17,7 +17,7 @@ class LocationPermission(val activity: Activity) {
         ActivityCompat.requestPermissions(
             activity,
             arrayOf(PERMISSION_STRING),requestCode)
-    }//TODO maybe add later ACCESS_COARSE_LOCATION permission
+    }// maybe add later ACCESS_COARSE_LOCATION permission
 
     fun isPermissionGranted(grantResults: IntArray):Boolean = grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED
 

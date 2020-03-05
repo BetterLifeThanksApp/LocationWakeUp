@@ -14,7 +14,7 @@ class CurrentSingleLocationListener(val locationEventsListener: LocationEventsLi
         //locationListener.getCurrentLocation(location)
         val test1 = location!!.latitude
         Log.i("LocationSlow","$test1")
-        //TODO LocationDataHelper.myLocationSuccess by interface
+        // LocationDataHelper.myLocationSuccess by interface
         locationEventsListener.mySingleLocationSuccess(location)
     }
 

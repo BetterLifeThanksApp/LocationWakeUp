@@ -155,10 +155,10 @@ class LocationDataOperations(val context: Context)
 
 
     /*
-    @SuppressLint("MissingPermission")//TODO add permission later
+    @SuppressLint("MissingPermission")//add permission later
     fun getMyLocation(locationListener:LocationListener){
         val locationManager = getLocationManager(locationListener)
-        //TODO 'Location' should't be return here.It should notify other method uses listener in CurrentSingleLocationListener class
+        // 'Location' should't be return here.It should notify other method uses listener in CurrentSingleLocationListener class
         //val provider = locationManager.getBestProvider(Criteria(),true)
         //locationManager.requestSingleUpdate(provider,CurrentSingleLocationListener(),null)
         val locationPermission = LocationPermission(activity)
@@ -196,8 +196,8 @@ class LocationDataOperations(val context: Context)
         when(requestCode){
             REQUEST_CODE->{
                 if(locationPermission.isPermissionGranted(grantResults)){
-                    //TODO run again all proccess(get location from edittextget and find longitude,latitude  and find my location etc..
-                    //val ldh = LocationDataHelper(context,"Zlota 44,Warsaw") //TODO It's only for testing,don't use this code
+                    // run again all proccess(get location from edittextget and find longitude,latitude  and find my location etc..
+                    //val ldh = LocationDataHelper(context,"Zlota 44,Warsaw") // It's only for testing,don't use this code
                     //ldh.getDistanceInfo()
                     val siema="przyznane więc jest git"
                     Log.i("Permission","granted")
@@ -218,7 +218,7 @@ class LocationDataOperations(val context: Context)
 
 
 
-    //@SuppressLint("MissingPermission")//TODO add permission later
+    //@SuppressLint("MissingPermission")// add permission later
     private fun getLocationManager(locationListener: LocationListener):LocationManager
     {
 

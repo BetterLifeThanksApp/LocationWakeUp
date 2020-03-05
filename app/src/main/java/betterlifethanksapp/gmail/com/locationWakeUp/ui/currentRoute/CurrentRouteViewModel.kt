@@ -109,7 +109,6 @@ class CurrentRouteViewModel(application: Application)
     fun setAlarmClockWithLocation()
     {
         _toastMessage.value = "YEA"
-        //TODO get location and send to repository and set the alarm when you are e.g. 2km from this location
         //TODO maybe first save location somewhere.Maybe return location in successLocation and save into val.If you click yes in dialogbox then I save into database(e.g 'Room') if I click no save variable to null
         viewModelScope.launch {repository.setAlarmClockWithLocation()}
         //TODO Temporary I use viewModelScope.In future maybe I want to ues another scope if I want to use location in background https://developer.android.com/training/location/request-updates#continue-user-initiated-action
@@ -122,7 +121,6 @@ class CurrentRouteViewModel(application: Application)
             activity.requestPermissions(
                 arrayOf(Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION),
                 REQUEST_CODE)
-        //TODO maybe add later ACCESS_COARSE_LOCATION permission
             Log.i("Permission","let in makeRequest")
     }
 

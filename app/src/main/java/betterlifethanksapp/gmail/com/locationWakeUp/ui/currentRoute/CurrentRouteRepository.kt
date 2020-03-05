@@ -37,7 +37,6 @@ class CurrentRouteRepository(val context: Context,
         internetConnect.isInternetAvailable() //TODO maybe inform when you have internet access
         ldh.checkPermissionCorrect() //TODO maybe not exception because if you grant permission(if you clicked yes on dialogbox) next method don't run ldh.estimateDistance(text) not run
         ldh.estimateDistance(text)
-        //TODO waiting for location is long (sometimes 8 sec) maybe use google services location or maybe use location.bestProviderLocation or use location from internet
     }
 
     suspend fun setAlarmClockWithLocation() {
