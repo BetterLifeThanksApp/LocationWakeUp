@@ -22,6 +22,7 @@ class CurrentRouteRepository(val context: Context,
     private val ldo:LocationDataOperations = LocationDataOperations(context)
     private val ldh:LocationDataHelper
     private val internetConnect:InternetConnect
+    private var isWakeUp = false
 
     init {
         //TODO send context.applicationContext and change variable into LoationDataOperation(don't use context.applicationContext in DataOperation class because i send context.applicationContext so use just context)
@@ -54,9 +55,10 @@ class CurrentRouteRepository(val context: Context,
 
     override fun successMultipleLocation(distance: Float) {
         Log.i("distance","$distance")
-        if(distance <=255.0f)//TODO 3.0 is temporary. In future I'll check value saved into memory and check if distance to destination is <3km I wake up the user.
+        if(!isWakeUp && distance <=255.0f)//TODO 3.0 is temporary. In future I'll check value saved into memory and check if distance to destination is <3km I wake up the user.
         {
-            wakeUpNow()//TODO look if you invoke previous(create boolean value)
+            isWakeUp=true
+            wakeUpNow()
         }
     }
 
