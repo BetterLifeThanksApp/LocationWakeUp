@@ -36,7 +36,10 @@ class LocationDataHelper(private val locationDataOperations:LocationDataOperatio
     suspend fun estimateDistance(text: String){
         destination = locationDataOperations.getDestinationLocation(text)
         val locationListener = CurrentSingleLocationListener(this)
-        locationDataOperations.getMySingleLocation(locationListener)
+        //locationDataOperations.getMySingleLocation(locationListener)
+        locationDataOperations.createSingleLocationRequest(this@LocationDataHelper)
+        locationDataOperations.createSettingsBuilder()
+        locationDataOperations.oneLocationUpdate()
     }
 
 

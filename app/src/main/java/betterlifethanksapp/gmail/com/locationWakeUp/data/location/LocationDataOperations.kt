@@ -25,6 +25,11 @@ class LocationDataOperations(val context: Context)
     private var locationRequest:LocationRequest? = null
     private lateinit var locationCallback: LocationCallback
     private lateinit var multipleEventsListener: LocationEventsListener
+    //single
+    private var locationSingleRequest:LocationRequest? = null //TODO maybe create all this variable(singla and multiple into LocationDataHelper class or another class think about it
+    private lateinit var locationSingleCallback: LocationCallback
+    private lateinit var singleEventsListener: LocationEventsListener
+
 
 
 
@@ -116,6 +121,37 @@ class LocationDataOperations(val context: Context)
 
     }
 
+    fun createSingleLocationRequest(eventsListener: LocationEventsListener){
+        singleEventsListener = eventsListener
+        //create LocationRequest
+        locationSingleRequest = LocationRequest.create()?.apply {
+            numUpdates=1
+            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        }
+    }
+
+    fun oneLocationUpdate() {
+        locationSingleCallback = object :LocationCallback(){
+            override fun onLocationResult(locationResult: LocationResult?) {
+                locationResult ?: return
+                for(location in locationResult.locations){
+                    Log.i("LocationGoogle","${location.longitude} + ${location.latitude}")
+                    singleEventsListener.mySingleLocationSuccess(location)
+                }
+            }
+        }
+
+        val fusedLocationClient = LocationServices.getFusedLocationProviderClient(context.applicationContext)
+        fusedLocationClient.requestLocationUpdates(
+            locationSingleRequest,
+            locationSingleCallback,
+            Looper.getMainLooper()
+        )
+
+    }
+
+
+
 
 
     /*
@@ -192,6 +228,7 @@ class LocationDataOperations(val context: Context)
 
 
     fun getDistance(myLocation: Location, destination: Location): Float = myLocation.distanceTo(destination) * 0.001f//TODO change because I don't know what kind of units do you use
+
 
 
 }
