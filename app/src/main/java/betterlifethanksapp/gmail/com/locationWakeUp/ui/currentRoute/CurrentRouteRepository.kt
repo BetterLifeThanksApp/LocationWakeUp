@@ -1,6 +1,7 @@
 package betterlifethanksapp.gmail.com.locationWakeUp.ui.currentRoute
 
 import android.content.Context
+import android.content.Intent
 import android.location.Location
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -10,6 +11,7 @@ import betterlifethanksapp.gmail.com.locationWakeUp.data.internet.InternetConnec
 import betterlifethanksapp.gmail.com.locationWakeUp.data.location.LocationDataHelper
 import betterlifethanksapp.gmail.com.locationWakeUp.data.location.LocationDataOperations
 import betterlifethanksapp.gmail.com.locationWakeUp.data.location.LocationEventsListener
+import betterlifethanksapp.gmail.com.locationWakeUp.data.services.NotificationWakeUpService
 import kotlinx.coroutines.coroutineScope
 import java.net.UnknownHostException
 
@@ -52,13 +54,16 @@ class CurrentRouteRepository(val context: Context,
 
     override fun successMultipleLocation(distance: Float) {
         Log.i("distance","$distance")
-        if(distance <=3.0f)//TODO 3.0 is temporary. In future I'll check value saved into memory and check if distance to destination is <3km I wake up the user.
+        if(distance <=255.0f)//TODO 3.0 is temporary. In future I'll check value saved into memory and check if distance to destination is <3km I wake up the user.
         {
-            wakeUpNow()
+            wakeUpNow()//TODO look if you invoke previous(create boolean value)
         }
     }
 
     private fun wakeUpNow() {
+        val intent = Intent(context.applicationContext,NotificationWakeUpService::class.java)
+        intent.putExtra(NotificationWakeUpService.MESSAGE(),"WSTAWEJ NIE UDAWEJ")
+        context.applicationContext.startService(intent)
         Log.i("Wake up","WAKE UP")
 
     }
