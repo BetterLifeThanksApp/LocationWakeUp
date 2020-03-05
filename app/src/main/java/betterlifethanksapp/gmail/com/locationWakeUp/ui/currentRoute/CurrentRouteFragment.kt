@@ -30,9 +30,6 @@ import java.text.DecimalFormat
 
 class CurrentRouteFragment : Fragment(){
 
-    private fun onButtonClicked(){
-        Toast.makeText(context,"KLIK",Toast.LENGTH_SHORT).show()
-    }
 
 
     companion object {
@@ -108,11 +105,7 @@ class CurrentRouteFragment : Fragment(){
         //getDistenceInfo()
         return v
     }
-/*
-    private fun makeRequest() {
-        requestPermissions()
-    }
-    */
+
 
 
 
@@ -127,11 +120,6 @@ class CurrentRouteFragment : Fragment(){
     }
 
 
-    fun getDistenceInfo()
-    {
-        //val ldh = LocationDataHelper(activity!!,"Zlota 44,Warsaw",distanceSuccess = this)
-        //ldh.getDistanceInfo()
-    }
 
 
 

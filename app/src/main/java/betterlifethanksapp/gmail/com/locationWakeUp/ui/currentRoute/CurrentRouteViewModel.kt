@@ -25,8 +25,6 @@ class CurrentRouteViewModel(application: Application)
     val dialogInterfaceText:LiveData<String>
         get() = _dialogInterfaceText
 
-
-
     private val _toastMessage = MutableLiveData<String>()
 
     val toastMessage:LiveData<String>
