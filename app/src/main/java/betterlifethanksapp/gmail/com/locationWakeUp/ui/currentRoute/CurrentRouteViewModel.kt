@@ -26,10 +26,6 @@ class CurrentRouteViewModel(application: Application)
         get() = _dialogInterfaceText
 
 
-    private val _distanceState = MutableLiveData<Boolean>()
-
-    val distancState:LiveData<Boolean>
-        get() = _distanceState
 
     private val _toastMessage = MutableLiveData<String>()
 
@@ -151,16 +147,6 @@ class CurrentRouteViewModel(application: Application)
         }
     }
 
-/*
-
-    override fun displayToast(text: Float) {
-        _distanceState.value=true
-    }
-
-    override fun locationFaliure() {
-        _distanceState.value=false
-    }
-    */
 
 
     override fun successSingleLocation(distance:Float){

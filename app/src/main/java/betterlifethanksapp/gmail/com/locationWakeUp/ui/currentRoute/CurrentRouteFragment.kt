@@ -28,17 +28,12 @@ import kotlinx.android.synthetic.main.current_route_fragment.view.*
 import java.math.RoundingMode
 import java.text.DecimalFormat
 
-class CurrentRouteFragment : Fragment(),DistanceSuccess{
+class CurrentRouteFragment : Fragment(){
 
     private fun onButtonClicked(){
         Toast.makeText(context,"KLIK",Toast.LENGTH_SHORT).show()
     }
 
-    override fun locationFaliure() {
-        val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
-        startActivity(intent)
-        Toast.makeText(context,"Włącz lokalizację i internet",Toast.LENGTH_LONG).show()
-    }
 
     companion object {
         fun newInstance() =
@@ -78,10 +73,6 @@ class CurrentRouteFragment : Fragment(),DistanceSuccess{
             }
         })
 
-        viewModel.distancState.observe(viewLifecycleOwner, Observer { state->
-            if(state) displayToast(1.0f)
-            else locationFaliure()
-        })
 
         viewModel.buttonEnabled.observe(viewLifecycleOwner, Observer { state->
             button.isClickable = state
@@ -142,12 +133,6 @@ class CurrentRouteFragment : Fragment(),DistanceSuccess{
         //ldh.getDistanceInfo()
     }
 
-    override fun displayToast(locationdistance:Float)
-    {
-        val df = DecimalFormat("#.#")
-        df.roundingMode = RoundingMode.CEILING
-       Toast.makeText(context,"Odległość w linii prostej to: ${df.format(locationdistance)} km ?",Toast.LENGTH_LONG).show()
-    }
 
 
 
