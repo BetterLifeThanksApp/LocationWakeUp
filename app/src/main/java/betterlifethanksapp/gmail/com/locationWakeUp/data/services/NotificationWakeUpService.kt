@@ -5,6 +5,7 @@ import android.app.IntentService
 import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
+import android.media.RingtoneManager
 import android.renderscript.RenderScript
 import android.util.Log
 import androidx.core.app.NotificationCompat
@@ -37,12 +38,17 @@ class NotificationWakeUpService: IntentService("NotificationWakeUpService") {
     }
 
     private fun createBuilder(text:String): NotificationCompat.Builder {
+
+        val alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
+
         return NotificationCompat.Builder(applicationContext,"hello my ...")
             .setSmallIcon(R.drawable.ic_dialog_map)
             .setContentTitle("Tytuł")
             .setContentText(text)
             .setPriority(NotificationCompat.PRIORITY_MAX)
-            .setVibrate(longArrayOf(0,2000,200,3000,500,1000,8000,600,400,300))
+            .setTicker("Alert!")
+            .setSound(alarmSound)//TODO zeby dzwiek gral uzytkownik musi miec nie wyciszona opcje 'powiadomienia' gdy klikniesz na przycisk glosnosi mozesz tą opcje wlaczyc
+            .setVibrate(longArrayOf(0,2000,200,3000,500,1000,8000,600,400,300))//TODO jesli uzytkownik na wylaczone wibracje w telefonie to opcje nie zadziala
             .setAutoCancel(true)
     }
 }
