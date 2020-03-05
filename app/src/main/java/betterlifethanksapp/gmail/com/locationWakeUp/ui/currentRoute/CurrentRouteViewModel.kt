@@ -148,7 +148,7 @@ class CurrentRouteViewModel(application: Application)
     override fun successSingleLocation(distance:Float){
         val tempInt:Int = distance.toInt()
         _dialogInterfaceText.value = "Distance in straight line is around $tempInt km\nSet up alarm clock?"
-        enableButtonDisableProgressBar()//TODO don't use this method in this place
+        _isProgressBarVisible.value = false
     }
 
     override fun failedSingleLocation() {
@@ -156,7 +156,7 @@ class CurrentRouteViewModel(application: Application)
         enableButtonDisableProgressBar()
     }
 
-    private fun enableButtonDisableProgressBar(){
+    fun enableButtonDisableProgressBar(){
         _buttonEnabled.value = true
         _isProgressBarVisible.value = false
     }

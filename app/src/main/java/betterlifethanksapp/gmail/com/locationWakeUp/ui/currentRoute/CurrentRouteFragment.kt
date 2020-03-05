@@ -56,6 +56,7 @@ class CurrentRouteFragment : Fragment(){
                     })
                     .setNegativeButton("NIE",DialogInterface.OnClickListener {
                             dialog, which -> Toast.makeText(context,"NEIN",Toast.LENGTH_SHORT).show()
+                            viewModel.enableButtonDisableProgressBar()
                     })
                 val alert = dialogBuilder.create()
                 alert.setTitle("Did you agree?")
