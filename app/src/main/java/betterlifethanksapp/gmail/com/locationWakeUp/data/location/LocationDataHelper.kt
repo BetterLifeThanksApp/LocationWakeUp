@@ -39,7 +39,7 @@ class LocationDataHelper(private val locationDataOperations:LocationDataOperatio
         //locationDataOperations.getMySingleLocation(locationListener)
         locationDataOperations.createSingleLocationRequest(this@LocationDataHelper)
         locationDataOperations.createSettingsBuilder()
-        locationDataOperations.oneLocationUpdate()
+        locationDataOperations.oneLocationUpdate()//TODO check if location is ON or OFF(previous You check this in CurrentSingleLcationListener class in override onProviderDisabled() )
     }
 
 
