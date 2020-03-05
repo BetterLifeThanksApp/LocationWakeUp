@@ -13,7 +13,7 @@ class CurrentSingleLocationListener(val locationEventsListener: LocationEventsLi
         //val locationListener:LocationEventsListener = CurrentRouteViewModel albo CurrentRouteRepository
         //locationListener.getCurrentLocation(location)
         val test1 = location!!.latitude
-        Log.i("Location","$test1")
+        Log.i("LocationSlow","$test1")
         //TODO LocationDataHelper.myLocationSuccess by interface
         locationEventsListener.mySingleLocationSuccess(location)
     }

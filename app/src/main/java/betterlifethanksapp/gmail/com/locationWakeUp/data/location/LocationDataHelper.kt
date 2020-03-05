@@ -1,6 +1,7 @@
 package betterlifethanksapp.gmail.com.locationWakeUp.data.location
 
 import android.location.Location
+import betterlifethanksapp.gmail.com.locationWakeUp.data.location.LocationPermission.Companion.PERMISSION_STRING
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -17,11 +18,12 @@ class LocationDataHelper(private val locationDataOperations:LocationDataOperatio
     lateinit var destination:Location
 
     companion object{
-        private const val PERMISSION_STRING:String = android.Manifest.permission.ACCESS_FINE_LOCATION
+        private const val PERMISSION_STRING1:String = android.Manifest.permission.ACCESS_COARSE_LOCATION
+        private const val PERMISSION_STRING2:String = android.Manifest.permission.ACCESS_FINE_LOCATION
     }
 
     suspend fun checkPermissionCorrect(){
-        locationDataOperations.checkPermissionCorrect(PERMISSION_STRING)
+        locationDataOperations.checkPermissionCorrect(PERMISSION_STRING1, PERMISSION_STRING2)
     }
 
     suspend fun launchLocationRequests() = withContext(Dispatchers.IO){

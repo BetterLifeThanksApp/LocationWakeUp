@@ -28,12 +28,18 @@ class LocationDataOperations(val context: Context)
 
 
 
-    suspend fun checkPermissionCorrect(permission:String) = withContext(Dispatchers.IO){
+    suspend fun checkPermissionCorrect(permission1:String,permission2:String) = withContext(Dispatchers.IO){
 
         //ALWAYS USE context.applicationContext because 'context' don't work.
-        if(ContextCompat.checkSelfPermission(context.applicationContext,
-                permission
-            ) != PackageManager.PERMISSION_GRANTED)
+        if(
+            (ContextCompat.checkSelfPermission
+                (context.applicationContext,
+                permission1) != PackageManager.PERMISSION_GRANTED)
+            &&
+                (ContextCompat.checkSelfPermission
+                (context.applicationContext,
+                    permission2) != PackageManager.PERMISSION_GRANTED)
+        )
         {
             throw AndroidException("No permission granted!")
         }
@@ -137,12 +143,13 @@ class LocationDataOperations(val context: Context)
     fun getMySingleLocation(locationListener: LocationListener)
     {
         val locationManager = getLocationManager(locationListener)
+
+        Log.i("LocationSlow","I get locationManager now i requestsingleUpdate")
         locationManager.requestSingleUpdate(
             LocationManager.GPS_PROVIDER,
             locationListener,
-            null
+            Looper.getMainLooper()
         )
-
     }
 
 /*
