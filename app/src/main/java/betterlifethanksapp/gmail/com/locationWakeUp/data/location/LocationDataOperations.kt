@@ -15,6 +15,9 @@ import com.google.android.gms.location.*
 import com.google.android.gms.tasks.Task
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.io.IOException
+import java.lang.Exception
+import java.lang.IllegalArgumentException
 
 class LocationDataOperations(val context: Context)
 //ALWAYS USE context.applicationContext because 'context' don't work.
@@ -54,11 +57,25 @@ class LocationDataOperations(val context: Context)
 
     suspend fun getDestinationLocation(address:String):Location =withContext(Dispatchers.IO) {
         val geocoder = Geocoder(context.applicationContext)
-        val address: Address =
-            geocoder.getFromLocationName(address, 1)[0]//get first element list of 'Address' class //TODO try to do something if throw exception
         val destination = Location("destination")
-        destination.latitude = address.latitude
-        destination.longitude = address.longitude
+        try {
+            val adress: Address =
+                geocoder.getFromLocationName(
+                    address,
+                    1
+                )[0]//get first element list of 'Address' class //TODO try to do something if throw exception
+
+            destination.latitude = adress.latitude
+            destination.longitude = adress.longitude
+        }catch (e:Exception)
+        {
+            when(e){
+                is IllegalArgumentException,is IOException ->{
+                    throw IOException("I couldn't find destination address:(\nPlease try enter another location")
+                }
+
+            }
+        }
         return@withContext destination
     }
 

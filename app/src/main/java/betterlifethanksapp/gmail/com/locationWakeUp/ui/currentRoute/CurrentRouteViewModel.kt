@@ -90,13 +90,8 @@ class CurrentRouteViewModel(application: Application)
                 }
                 catch(e:Exception)
                 {
-                    when(e){
-                        is IllegalArgumentException,is IOException->{
-                            _toastMessage.value = "I couldn't find destination address:(\nPlease try enter another location"
+                            _toastMessage.value = e.message
                             enableButtonDisableProgressBar()
-                        }
-
-                    }
 
                 }
             }
