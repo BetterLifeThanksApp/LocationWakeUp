@@ -229,6 +229,10 @@ class LocationDataOperations(val context: Context)
 
     fun getDistance(myLocation: Location, destination: Location): Float = myLocation.distanceTo(destination) * 0.001f//TODO change because I don't know what kind of units do you use
 
+    fun isLocationOn(): Boolean {
+        val lm = context.applicationContext.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        return lm.isProviderEnabled(LocationManager.GPS_PROVIDER)
+    }
 
 
 }

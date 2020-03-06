@@ -32,6 +32,15 @@ class LocationDataHelper(private val locationDataOperations:LocationDataOperatio
         locationDataOperations.startLocationUpdated()
     }
 
+    fun checkLocationOn():Boolean{
+        val isLocationOn = locationDataOperations.isLocationOn()
+        if(!isLocationOn)
+        {
+            locationResult.failedSingleLocation()
+        }
+        return isLocationOn
+    }
+
 
     suspend fun estimateDistance(text: String){
         destination = locationDataOperations.getDestinationLocation(text)
@@ -39,7 +48,7 @@ class LocationDataHelper(private val locationDataOperations:LocationDataOperatio
         //locationDataOperations.getMySingleLocation(locationListener)
         locationDataOperations.createSingleLocationRequest(this@LocationDataHelper)
         locationDataOperations.createSettingsBuilder()
-        locationDataOperations.oneLocationUpdate()//TODO check if location is ON or OFF(previous You check this in CurrentSingleLcationListener class in override onProviderDisabled() )
+        locationDataOperations.oneLocationUpdate()
     }
 
 
