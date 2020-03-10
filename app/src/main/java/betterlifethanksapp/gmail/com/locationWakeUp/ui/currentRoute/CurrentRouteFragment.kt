@@ -96,8 +96,14 @@ class CurrentRouteFragment : Fragment(){
                 progressBar.visibility = View.GONE
             }
         })
+        viewModel.buttonClick.observe(viewLifecycleOwner, Observer { clicked->
+            if(clicked)
+            {
+                clickButton()
+            }
+        })
 
-        v.button.setOnClickListener{viewModel.onButtonClicked(etWhere.text.toString()) }
+        v.button.setOnClickListener{clickButton() }
 
 
         //TODO Maybe add alert to inform that app use location,internet and notification,so make sure that your notification sound,location and internet is on ;)
@@ -107,7 +113,9 @@ class CurrentRouteFragment : Fragment(){
         return v
     }
 
-
+    private fun clickButton(){
+        viewModel.onButtonClicked(etWhere.text.toString())
+    }
 
 
     override fun onRequestPermissionsResult(

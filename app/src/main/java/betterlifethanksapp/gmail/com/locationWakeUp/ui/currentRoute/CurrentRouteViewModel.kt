@@ -45,6 +45,13 @@ class CurrentRouteViewModel(application: Application)
     val isProgressBarVisible:LiveData<Boolean>
             get() = _isProgressBarVisible
 
+    private val _buttonClick = MutableLiveData<Boolean>()
+
+    val buttonClick:LiveData<Boolean>
+        get() = _buttonClick
+
+
+
     private val REQUEST_CODE = 984
 
 
@@ -75,6 +82,7 @@ class CurrentRouteViewModel(application: Application)
             viewModelScope.launch {
                 _buttonEnabled.value=false
                 _isProgressBarVisible.value = true
+                _buttonClick.value = false
                 try {
                     //TODO add progress circle(for waiting) and disable in myLocationSuccess() and myLocationFaliure() implemented methods :)
                     repository.getDistenceInfo(text!!)
@@ -132,7 +140,7 @@ class CurrentRouteViewModel(application: Application)
                 }
                 else
                 {
-                    Log.i("Permission","granted")
+                    _buttonClick.value = true
                 }
             }
         }
