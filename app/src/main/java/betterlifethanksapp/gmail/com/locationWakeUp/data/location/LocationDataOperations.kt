@@ -14,6 +14,7 @@ import betterlifethanksapp.gmail.com.locationWakeUp.ui.currentRoute.CurrentRoute
 import com.google.android.gms.location.*
 import com.google.android.gms.tasks.Task
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import java.io.IOException
 import java.lang.Exception
@@ -59,19 +60,32 @@ class LocationDataOperations(val context: Context)
         val geocoder = Geocoder(context.applicationContext)
         val destination = Location("destination")
         try {
-            val adress: Address =
+            var addressResult=
                 geocoder.getFromLocationName(
                     address,
                     1
-                )[0]//get first element list of 'Address' class //TODO try to do something if throw exception
-
-            destination.latitude = adress.latitude
-            destination.longitude = adress.longitude
-        }catch (e:Exception)
+                )
+            if(addressResult.isEmpty()) {
+                delay(2000)
+                addressResult=
+                    geocoder.getFromLocationName(
+                        address,
+                        1
+                    )
+                destination.latitude = addressResult[0].latitude
+                destination.longitude = addressResult[0].longitude
+                Log.i("address","empty")
+            }
+            else {
+                Log.i("address","not empty")
+                destination.latitude = addressResult[0].latitude
+                destination.longitude = addressResult[0].longitude
+            }
+            }catch (e:Exception)
         {
             when(e){
                 is IllegalArgumentException,is IOException ->{
-                    throw IOException("I couldn't find destination address:(\nPlease try enter another location")
+                    throw IOException("I couldn't find destination address:(\nPlease try enter correct location\ncheck internet connection\n and click again to button")
                 }
 
             }
