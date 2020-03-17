@@ -5,16 +5,26 @@
     android:id="@+id/mobile_navigation"
     app:startDestination="@id/currentRouteFragment">
 
+    <action
+        android:id="@+id/action_global_routesFragment"
+        app:destination="@id/routesFragment"/>
+
+    <action
+        android:id="@+id/action_global_settingsFragment"
+        app:destination="@id/settingsFragment"/>
+
     <fragment
         android:id="@+id/currentRouteFragment"
         android:name="betterlifethanksapp.gmail.com.locationWakeUp.ui.currentRoute.CurrentRouteFragment"
         android:label="current_route_fragment"
-        tools:layout="@layout/current_route_fragment" />
+        tools:layout="@layout/current_route_fragment" >
+    </fragment>
     <fragment
         android:id="@+id/routesFragment"
         android:name="betterlifethanksapp.gmail.com.locationWakeUp.ui.routes.RoutesFragment"
         android:label="routes_fragment"
-        tools:layout="@layout/routes_fragment" />
+        tools:layout="@layout/routes_fragment" >
+    </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="betterlifethanksapp.gmail.com.locationWakeUp.ui.settings.SettingsFragment"
