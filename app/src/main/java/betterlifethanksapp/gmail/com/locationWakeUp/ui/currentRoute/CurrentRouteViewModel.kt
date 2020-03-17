@@ -14,7 +14,9 @@ import kotlinx.coroutines.launch
 import java.io.IOException
 import java.lang.Exception
 import java.lang.IllegalArgumentException
+import java.math.RoundingMode
 import java.net.UnknownHostException
+import java.text.DecimalFormat
 
 class CurrentRouteViewModel(application: Application)
     : AndroidViewModel(application),
@@ -49,6 +51,17 @@ class CurrentRouteViewModel(application: Application)
 
     val buttonClick:LiveData<Boolean>
         get() = _buttonClick
+
+    private val _textView = MutableLiveData<String>()
+
+    val textView:LiveData<String>
+        get() = _textView
+
+    private val _wakeUpMode = MutableLiveData<Boolean>()
+
+    val wakeUpMode:LiveData<Boolean>
+            get() = _wakeUpMode
+    //TODO You should create button to cancel wakeUpMode
 
 
 
@@ -111,10 +124,24 @@ class CurrentRouteViewModel(application: Application)
 
     fun setAlarmClockWithLocation()
     {
+        _wakeUpMode.value=true
         _toastMessage.value = "YEA"
+
         //TODO maybe first save location somewhere.Maybe return location in successLocation and save into val.If you click yes in dialogbox then I save into database(e.g 'Room') if I click no save variable to null
-        viewModelScope.launch {repository.setAlarmClockWithLocation()}
+        viewModelScope.launch {
+            observeDistance()
+            repository.setAlarmClockWithLocation()
+
+        }
         //TODO Temporary I use viewModelScope.In future maybe I want to ues another scope if I want to use location in background https://developer.android.com/training/location/request-updates#continue-user-initiated-action
+    }
+
+    private fun observeDistance() {
+        repository.distance.observeForever { distance->
+            val df = DecimalFormat("#.#")
+            df.roundingMode = RoundingMode.CEILING
+            _textView.value = "You're from destination ${df.format(distance)} km"
+        }
     }
 
     fun makeRequest(activity: Fragment) {

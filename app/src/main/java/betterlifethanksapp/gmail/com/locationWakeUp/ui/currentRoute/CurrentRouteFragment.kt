@@ -106,6 +106,21 @@ class CurrentRouteFragment : Fragment(){
         v.button.setOnClickListener{clickButton() }
 
 
+        viewModel.textView.observe(viewLifecycleOwner, Observer { text->
+            tvInfo.text = text
+        })
+
+        viewModel.wakeUpMode.observe(viewLifecycleOwner, Observer { wakeUpModeOn->
+            if(wakeUpModeOn)
+            {
+                replaceViewToWaitingTimeView()
+            }
+            else
+            {
+                backToStandardView()
+            }
+        })
+
         //TODO Maybe add alert to inform that app use location,internet and notification,so make sure that your notification sound,location and internet is on ;)
         //Set observer internet and location checked.
         //if something wrong,display appropriate message.
@@ -135,6 +150,17 @@ class CurrentRouteFragment : Fragment(){
     }
 
 
+    private fun replaceViewToWaitingTimeView(){
+        tvWhere.visibility = View.INVISIBLE
+        etWhere.visibility = View.INVISIBLE
+        button.visibility = View.INVISIBLE
+    }
+
+    private fun backToStandardView(){
+        tvWhere.visibility = View.VISIBLE
+        etWhere.visibility = View.VISIBLE
+        button.visibility = View.VISIBLE
+    }
 
 
 }
