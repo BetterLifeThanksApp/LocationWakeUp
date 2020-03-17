@@ -27,17 +27,39 @@ class MainActivity : AppCompatActivity() {
 
         bottom_nav.setupWithNavController(navController)
 
+        bottom_nav.setOnNavigationItemSelectedListener { item->
+            when(item.itemId){
+                R.id.currentRouteFragment->{
+                    navController.popBackStack(R.id.currentRouteFragment,false)
+                }
+                R.id.routesFragment->{
+                    navController.navigate(R.id.action_global_routesFragment)
+                }
+                R.id.settingsFragment->{
+                    navController.navigate(R.id.action_global_settingsFragment)
+                }
+
+            }
+            return@setOnNavigationItemSelectedListener true
+
+        }
+
         NavigationUI.setupActionBarWithNavController(
             this,
             navController
         )
 
-
     }
 
 
     override fun onSupportNavigateUp(): Boolean {
-        return NavigationUI.navigateUp(navController,null)
+        navController.popBackStack(R.id.currentRouteFragment,false)
+        return true//return NavigationUI.navigateUp(navController,null)
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        navController.popBackStack(R.id.currentRouteFragment,false)
     }
 /*
     override fun onRequestPermissionsResult(

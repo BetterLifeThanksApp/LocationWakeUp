@@ -129,6 +129,10 @@ class CurrentRouteFragment : Fragment(){
     }
 
 
+    override fun onDestroyView() {
+        viewModel.onDestroyView()
+        super.onDestroyView()
+    }
 
 
 
