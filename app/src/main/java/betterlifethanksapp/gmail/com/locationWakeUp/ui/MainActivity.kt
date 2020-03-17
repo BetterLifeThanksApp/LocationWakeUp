@@ -49,8 +49,6 @@ class MainActivity : AppCompatActivity() {
             navController
         )
 
-        //TODO DialogBox and toast display again if I back to CurrentRouteFragment
-
     }
 
 

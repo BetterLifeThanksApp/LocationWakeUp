@@ -164,4 +164,13 @@ class CurrentRouteViewModel(application: Application)
         _isProgressBarVisible.value = false
     }
 
+    fun onDestroyView(){
+        resetViewValues()
+    }
+
+    private fun resetViewValues() {
+        _toastMessage.value=null
+        _dialogInterfaceText.value=null
+    }
+
 }
