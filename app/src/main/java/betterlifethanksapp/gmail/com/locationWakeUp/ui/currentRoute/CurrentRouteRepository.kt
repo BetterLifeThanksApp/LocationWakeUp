@@ -78,4 +78,12 @@ class CurrentRouteRepository(val context: Context,
     override fun failedMultipleLocation() {
         //handle this later //TODO
     }
+
+    fun insertIfNotExist(locationName: String) {
+        //check if database(db) exist
+        //if not exist,create
+        //check if locationName is in database
+        //if not exist insert into db
+        //dao.insert(locationName)
+    }
 }

@@ -57,7 +57,7 @@ class CurrentRouteFragment : Fragment(){
                     .setPositiveButton("Tak",DialogInterface.OnClickListener{
                             dialog,id ->
                         sharedViewModel.setDestination(etWhere.text.toString())
-                        viewModel.setAlarmClockWithLocation()
+                        viewModel.setAlarmClockWithLocation(etWhere.text.toString())
                     })
                     .setNegativeButton("NIE",DialogInterface.OnClickListener {
                             dialog, which -> Toast.makeText(context,"NEIN",Toast.LENGTH_SHORT).show()
