@@ -17,11 +17,13 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.view.isVisible
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 
 import betterlifethanksapp.gmail.com.locationWakeUp.R
 import betterlifethanksapp.gmail.com.locationWakeUp.data.location.DistanceSuccess
 import betterlifethanksapp.gmail.com.locationWakeUp.data.location.LocationDataHelper
+import betterlifethanksapp.gmail.com.locationWakeUp.sharedViewModel.DestinationLocationViewModel
 import betterlifethanksapp.gmail.com.locationWakeUp.ui.MainActivity
 import kotlinx.android.synthetic.main.current_route_fragment.*
 import kotlinx.android.synthetic.main.current_route_fragment.view.*
@@ -38,6 +40,7 @@ class CurrentRouteFragment : Fragment(){
     }
 
     private lateinit var viewModel: CurrentRouteViewModel
+    private val sharedViewModel:DestinationLocationViewModel by activityViewModels()
 
 
     override fun onCreateView(
@@ -52,7 +55,9 @@ class CurrentRouteFragment : Fragment(){
                 val dialogBuilder = AlertDialog.Builder(v.context)
                     .setCancelable(false)
                     .setPositiveButton("Tak",DialogInterface.OnClickListener{
-                            dialog,id -> viewModel.setAlarmClockWithLocation()
+                            dialog,id ->
+                        sharedViewModel.setDestination(etWhere.text.toString())
+                        viewModel.setAlarmClockWithLocation()
                     })
                     .setNegativeButton("NIE",DialogInterface.OnClickListener {
                             dialog, which -> Toast.makeText(context,"NEIN",Toast.LENGTH_SHORT).show()
@@ -117,6 +122,7 @@ class CurrentRouteFragment : Fragment(){
             }
             else
             {
+                sharedViewModel.setDestination("no destination")
                 backToStandardView()
             }
         })
