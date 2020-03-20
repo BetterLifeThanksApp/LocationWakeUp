@@ -1,5 +1,6 @@
 package betterlifethanksapp.gmail.com.locationWakeUp.data.db
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 
 @Dao
@@ -13,4 +14,7 @@ interface LocationDao {
 
     @Delete
     suspend fun deleteLocation(location:Location)
+
+    @Query("SELECT * FROM location_table")
+    fun getAllLocations(): LiveData<List<Location>>
 }
