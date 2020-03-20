@@ -1,7 +1,9 @@
 package betterlifethanksapp.gmail.com.locationWakeUp.ui.routes
 
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 
-class RoutesViewModel : ViewModel() {
+class RoutesViewModel(application: Application)
+    : AndroidViewModel(application){
     // TODO: Implement the ViewModel
 }
