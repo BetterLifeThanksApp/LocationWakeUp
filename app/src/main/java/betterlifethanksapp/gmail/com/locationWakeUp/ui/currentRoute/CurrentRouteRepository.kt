@@ -6,6 +6,7 @@ import android.location.Location
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import betterlifethanksapp.gmail.com.locationWakeUp.data.db.LocationDao
 import betterlifethanksapp.gmail.com.locationWakeUp.data.internet.InternetConnect
 import betterlifethanksapp.gmail.com.locationWakeUp.data.internet.InternetConnectI
 import betterlifethanksapp.gmail.com.locationWakeUp.data.location.LocationDataHelper
@@ -16,7 +17,8 @@ import kotlinx.coroutines.coroutineScope
 import java.net.UnknownHostException
 
 class CurrentRouteRepository(val context: Context,
-                             private val callbackListener:LocationEventsListener.OnFinishedLocationSingleOperations.OnFinishedSingleLocationVm)
+                             private val callbackListener:LocationEventsListener.OnFinishedLocationSingleOperations.OnFinishedSingleLocationVm,
+                             private val locationDao:LocationDao)
     :LocationEventsListener.OnFinishedLocationSingleOperations {
 
     private val ldo:LocationDataOperations = LocationDataOperations(context)
@@ -77,5 +79,15 @@ class CurrentRouteRepository(val context: Context,
 
     override fun failedMultipleLocation() {
         //handle this later //TODO
+    }
+
+    suspend fun insertIfNotExist(locationName: String) {
+        val location = betterlifethanksapp.gmail.com.locationWakeUp.data.db.Location(locationName)
+        locationDao.insert(location)
+        //check if database(db) exist
+        //if not exist,create
+        //check if locationName is in database
+        //if not exist insert into db
+        //dao.insert(locationName)
     }
 }

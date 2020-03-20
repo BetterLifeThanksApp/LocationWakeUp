@@ -8,12 +8,11 @@ import android.util.AndroidException
 import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
-import betterlifethanksapp.gmail.com.locationWakeUp.data.internet.InternetConnect
+import betterlifethanksapp.gmail.com.locationWakeUp.data.db.LocationDao
+import betterlifethanksapp.gmail.com.locationWakeUp.data.db.LocationRoomDatabase
 import betterlifethanksapp.gmail.com.locationWakeUp.data.location.*
 import kotlinx.coroutines.launch
-import java.io.IOException
 import java.lang.Exception
-import java.lang.IllegalArgumentException
 import java.math.RoundingMode
 import java.net.UnknownHostException
 import java.text.DecimalFormat
@@ -74,7 +73,8 @@ class CurrentRouteViewModel(application: Application)
     init {
         _buttonEnabled.value = true
         _permissionGranted.value = true
-        repository = CurrentRouteRepository(application,this)
+        val locationDao = LocationRoomDatabase.getDatabase(application).locationDao()
+        repository = CurrentRouteRepository(application,this,locationDao)
         //val ll = CurrentSingleLocationListener(this)
         //1.Create location references
         //2.Create Repository references with location ref in constructor
@@ -122,7 +122,7 @@ class CurrentRouteViewModel(application: Application)
     }
 
 
-    fun setAlarmClockWithLocation()
+    fun setAlarmClockWithLocation(locationName:String)
     {
         _wakeUpMode.value=true
         _toastMessage.value = "YEA"
@@ -130,6 +130,7 @@ class CurrentRouteViewModel(application: Application)
         //TODO maybe first save location somewhere.Maybe return location in successLocation and save into val.If you click yes in dialogbox then I save into database(e.g 'Room') if I click no save variable to null
         viewModelScope.launch {
             observeDistance()
+            repository.insertIfNotExist(locationName)
             repository.setAlarmClockWithLocation()
 
         }
