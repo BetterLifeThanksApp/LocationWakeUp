@@ -31,6 +31,7 @@ class RoutesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         Log.i("state","CreateView")
+        viewModel = ViewModelProviders.of(this).get(RoutesViewModel::class.java)
         sharedModel.destinationLocation.observe(viewLifecycleOwner,Observer<String>{
                 destinationLocation->
             tvCurrentDestinationInfo.text = destinationLocation
@@ -43,13 +44,16 @@ class RoutesFragment : Fragment() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(activity)
 
+        viewModel.allLocation.observe(viewLifecycleOwner, Observer { locations->
+            locations?.let { adapter.setLocations(it) }
+        })
+
         return rootView
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         Log.i("state","ActivityCreated")
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(RoutesViewModel::class.java)
 
     }
 
