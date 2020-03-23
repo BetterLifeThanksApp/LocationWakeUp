@@ -9,8 +9,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 import betterlifethanksapp.gmail.com.locationWakeUp.R
+import betterlifethanksapp.gmail.com.locationWakeUp.data.db.LocationListAdapter
 import betterlifethanksapp.gmail.com.locationWakeUp.sharedViewModel.DestinationLocationViewModel
 import kotlinx.android.synthetic.main.routes_fragment.*
 
@@ -33,8 +36,14 @@ class RoutesFragment : Fragment() {
             tvCurrentDestinationInfo.text = destinationLocation
         })
 
+        val rootView = inflater.inflate(R.layout.routes_fragment, container, false)
 
-        return inflater.inflate(R.layout.routes_fragment, container, false)
+        val recyclerView = rootView.findViewById<RecyclerView>(R.id.rvLocations)
+        val adapter = LocationListAdapter(context!!.applicationContext)
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(activity)
+
+        return rootView
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
