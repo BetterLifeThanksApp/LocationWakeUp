@@ -6,7 +6,7 @@
         <ListPreference
             android:key="UNIT_SYSTEM"
             android:title="Unit system"
-            android:defaultValue="km"
+            android:defaultValue="KM"
             android:entries="@array/unitSystemEntries"
             android:entryValues="@array/unitSystemValues"/>
     </PreferenceCategory>
