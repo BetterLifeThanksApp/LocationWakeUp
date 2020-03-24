@@ -1,16 +1,25 @@
 package betterlifethanksapp.gmail.com.locationWakeUp.ui.settings
 
+import android.content.SharedPreferences
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 
 import betterlifethanksapp.gmail.com.locationWakeUp.R
 
-class SettingsFragment : PreferenceFragmentCompat() {
+class SettingsFragment : PreferenceFragmentCompat(),SharedPreferences.OnSharedPreferenceChangeListener {
+
+    // To prevent unintended garbage collection, I must store a strong reference to the listener.
+    //That's recommend from https://developer.android.com/guide/topics/ui/settings/use-saved-values#onsharedpreferencechangelistener
+    val listener:SharedPreferences.OnSharedPreferenceChangeListener = SharedPreferences.OnSharedPreferenceChangeListener{sharedPreferences, key ->
+        onSharedPreferenceChanged(sharedPreferences,key)
+    }
 
     companion object {
         fun newInstance() = SettingsFragment()
@@ -23,8 +32,24 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
 
 
+    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
+        if(key =="UNIT_SYSTEM")
+        {
+            val result = sharedPreferences?.getString(key,"KM")
+            Log.i("valuesPreferences","$result")
+        }
 
+    }
 
+    override fun onResume() {
+        super.onResume()
+        preferenceManager.sharedPreferences.registerOnSharedPreferenceChangeListener(this)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        preferenceManager.sharedPreferences.unregisterOnSharedPreferenceChangeListener(this)
+    }
 
 
 }

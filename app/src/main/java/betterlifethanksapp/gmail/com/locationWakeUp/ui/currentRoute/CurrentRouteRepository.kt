@@ -6,6 +6,7 @@ import android.location.Location
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.preference.PreferenceManager
 import betterlifethanksapp.gmail.com.locationWakeUp.data.db.LocationDao
 import betterlifethanksapp.gmail.com.locationWakeUp.data.internet.InternetConnect
 import betterlifethanksapp.gmail.com.locationWakeUp.data.internet.InternetConnectI
@@ -30,11 +31,17 @@ class CurrentRouteRepository(val context: Context,
         get() = _distance
 
     init {
+        getUnitsFromPreference()
         //TODO send context.applicationContext and change variable into LoationDataOperation(don't use context.applicationContext in DataOperation class because i send context.applicationContext so use just context)
         ldh = LocationDataHelper(ldo,this)
         internetConnect = InternetConnect()
     }
 
+    private fun getUnitsFromPreference() {
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context.applicationContext)
+        val name = sharedPreferences.getString("UNIT_SYSTEM","")
+        Log.i("valuesPreferences","$name tak")
+    }
 
 
     suspend fun getDistenceInfo(text:String)
