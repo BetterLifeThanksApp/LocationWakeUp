@@ -3,7 +3,6 @@ package betterlifethanksapp.gmail.com.locationWakeUp.ui.currentRoute
 import android.content.Context
 import android.content.Intent
 import android.location.Location
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.preference.PreferenceManager
@@ -34,7 +33,6 @@ class CurrentRouteRepository(val context: Context,
         get() = _distance
 
     init {
-        //TODO send context.applicationContext and change variable into LoationDataOperation(don't use context.applicationContext in DataOperation class because i send context.applicationContext so use just context)
         ldh = LocationDataHelper(ldo,this)
         internetConnect = InternetConnect()
     }
@@ -43,8 +41,8 @@ class CurrentRouteRepository(val context: Context,
 
     suspend fun getDistenceInfo(text:String)
     {
-        internetConnect.isInternetAvailable() //TODO maybe inform when you have internet access
-        ldh.checkPermissionCorrect() //TODO maybe not exception because if you grant permission(if you clicked yes on dialogbox) next method don't run ldh.estimateDistance(text) not run
+        internetConnect.isInternetAvailable()//TODO maybe in future I'll inform user when he have internet and location access ;)
+        ldh.checkPermissionCorrect()
         if(ldh.checkLocationOn()) {
             ldh.estimateDistance(text)
         }
@@ -52,7 +50,6 @@ class CurrentRouteRepository(val context: Context,
 
     suspend fun setAlarmClockWithLocation() {
         ldh.launchLocationRequests()
-        Log.i("LOCATION DESTINATION","${ldh.destination.latitude} and ${ldh.destination.longitude}")
     }
 
     override  fun successSingleLocation(distance: Float) {
@@ -64,9 +61,8 @@ class CurrentRouteRepository(val context: Context,
     }
 
     override fun successMultipleLocation(distance: Float) {
-        Log.i("distance","$distance")
         _distance.value = distance
-        if(!isWakeUp && distance <=3.0f)//TODO 3.0 is temporary. In future I'll check value saved into memory and check if distance to destination is <3km I wake up the user.
+        if(!isWakeUp && distance <=3.0f)
         {
             isWakeUp=true
             wakeUpNow()
@@ -77,8 +73,6 @@ class CurrentRouteRepository(val context: Context,
         val intent = Intent(context.applicationContext,NotificationWakeUpService::class.java)
         intent.putExtra(NotificationWakeUpService.MESSAGE(),context.applicationContext.getString(R.string.wake_up))
         context.applicationContext.startService(intent)
-        Log.i("Wake up","WAKE UP")
-
     }
 
     override fun failedMultipleLocation() {
