@@ -16,18 +16,18 @@
     <fragment
         android:id="@+id/currentRouteFragment"
         android:name="betterlifethanksapp.gmail.com.locationWakeUp.ui.currentRoute.CurrentRouteFragment"
-        android:label="current_route_fragment"
+        android:label="Current route"
         tools:layout="@layout/current_route_fragment" >
     </fragment>
     <fragment
         android:id="@+id/routesFragment"
         android:name="betterlifethanksapp.gmail.com.locationWakeUp.ui.routes.RoutesFragment"
-        android:label="routes_fragment"
+        android:label="Routes"
         tools:layout="@layout/routes_fragment" >
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="betterlifethanksapp.gmail.com.locationWakeUp.ui.settings.SettingsFragment"
-        android:label="settings_fragment"
+        android:label="Settings"
         tools:layout="@layout/settings_fragment" />
 </navigation>
