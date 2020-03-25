@@ -130,7 +130,6 @@ class CurrentRouteFragment : Fragment(){
             viewModel.onUnitChanged(unit)
         })
 
-        //TODO Maybe add alert to inform that app use location,internet and notification,so make sure that your notification sound,location and internet is on ;)
         //Set observer internet and location checked.
         //if something wrong,display appropriate message.
         //getDistenceInfo()

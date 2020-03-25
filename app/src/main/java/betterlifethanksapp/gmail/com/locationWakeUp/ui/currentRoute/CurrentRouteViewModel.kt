@@ -65,7 +65,6 @@ class CurrentRouteViewModel(application: Application)
 
     val wakeUpMode:LiveData<Boolean>
             get() = _wakeUpMode
-    //TODO You should create button to cancel wakeUpMode
 
     private var unitsName:String=""
 
@@ -97,7 +96,6 @@ class CurrentRouteViewModel(application: Application)
                 _isProgressBarVisible.value = true
                 _buttonClick.value = false
                 try {
-                    //TODO add progress circle(for waiting) and disable in myLocationSuccess() and myLocationFaliure() implemented methods :)
                     repository.getDistenceInfo(text!!)
                 }
                 catch (e: UnknownHostException){
@@ -137,14 +135,12 @@ class CurrentRouteViewModel(application: Application)
         _wakeUpMode.value=true
         _toastMessage.value = "YEA"
 
-        //TODO maybe first save location somewhere.Maybe return location in successLocation and save into val.If you click yes in dialogbox then I save into database(e.g 'Room') if I click no save variable to null
         viewModelScope.launch {
             observeDistance()
             repository.insertIfNotExist(locationName)
             repository.setAlarmClockWithLocation()
 
         }
-        //TODO Temporary I use viewModelScope.In future maybe I want to ues another scope if I want to use location in background https://developer.android.com/training/location/request-updates#continue-user-initiated-action
     }
 
     private fun observeDistance() {

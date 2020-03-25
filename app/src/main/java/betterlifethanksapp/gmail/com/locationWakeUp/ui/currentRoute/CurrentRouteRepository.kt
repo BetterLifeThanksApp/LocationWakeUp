@@ -33,7 +33,6 @@ class CurrentRouteRepository(val context: Context,
         get() = _distance
 
     init {
-        //TODO send context.applicationContext and change variable into LoationDataOperation(don't use context.applicationContext in DataOperation class because i send context.applicationContext so use just context)
         ldh = LocationDataHelper(ldo,this)
         internetConnect = InternetConnect()
     }
@@ -42,8 +41,8 @@ class CurrentRouteRepository(val context: Context,
 
     suspend fun getDistenceInfo(text:String)
     {
-        internetConnect.isInternetAvailable() //TODO maybe inform when you have internet access
-        ldh.checkPermissionCorrect() //TODO maybe not exception because if you grant permission(if you clicked yes on dialogbox) next method don't run ldh.estimateDistance(text) not run
+        internetConnect.isInternetAvailable()//TODO maybe in future I'll inform user when he have internet and location access ;)
+        ldh.checkPermissionCorrect()
         if(ldh.checkLocationOn()) {
             ldh.estimateDistance(text)
         }
@@ -63,7 +62,7 @@ class CurrentRouteRepository(val context: Context,
 
     override fun successMultipleLocation(distance: Float) {
         _distance.value = distance
-        if(!isWakeUp && distance <=3.0f)//TODO 3.0 is temporary. In future I'll check value saved into memory and check if distance to destination is <3km I wake up the user.
+        if(!isWakeUp && distance <=3.0f)
         {
             isWakeUp=true
             wakeUpNow()
