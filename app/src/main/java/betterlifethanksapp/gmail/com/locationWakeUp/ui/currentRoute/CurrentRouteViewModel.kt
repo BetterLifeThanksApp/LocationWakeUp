@@ -6,7 +6,6 @@ import android.app.Application
 import android.content.Context
 import android.content.pm.PackageManager
 import android.util.AndroidException
-import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
 import androidx.preference.PreferenceManager
@@ -157,13 +156,9 @@ class CurrentRouteViewModel(application: Application)
     }
 
     fun makeRequest(activity: Fragment) {
-        Log.i("Permission","makeRequest()")
-
-
             activity.requestPermissions(
                 arrayOf(Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION),
                 REQUEST_CODE)
-            Log.i("Permission","let in makeRequest")
     }
 
     fun onRequestPermissionsResult(
