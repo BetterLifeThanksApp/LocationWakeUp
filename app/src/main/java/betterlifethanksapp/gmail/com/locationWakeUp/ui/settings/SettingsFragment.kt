@@ -3,7 +3,6 @@ package betterlifethanksapp.gmail.com.locationWakeUp.ui.settings
 import android.content.SharedPreferences
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -43,7 +42,6 @@ class SettingsFragment : PreferenceFragmentCompat(),SharedPreferences.OnSharedPr
         if(key =="UNIT_SYSTEM")
         {
             val result = sharedPreferences?.getString(key,"KM")
-            Log.i("valuesPreferences","$result")
             result?.let {
                 val operations = PreferencesOperations()
                 val unitEnumType = operations.getUnitEnumType(result)

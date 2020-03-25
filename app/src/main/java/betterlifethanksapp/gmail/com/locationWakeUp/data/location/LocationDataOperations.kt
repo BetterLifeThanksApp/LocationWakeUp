@@ -8,7 +8,6 @@ import android.location.*
 import android.location.LocationListener
 import android.os.Looper
 import android.util.AndroidException
-import android.util.Log
 import androidx.core.content.ContextCompat
 import betterlifethanksapp.gmail.com.locationWakeUp.ui.currentRoute.CurrentRouteFragment
 import com.google.android.gms.location.*
@@ -75,10 +74,8 @@ class LocationDataOperations(val context: Context)
                     )
                 destination.latitude = addressResult[0].latitude
                 destination.longitude = addressResult[0].longitude
-                Log.i("address","empty")
             }
             else {
-                Log.i("address","not empty")
                 destination.latitude = addressResult[0].latitude
                 destination.longitude = addressResult[0].longitude
             }
@@ -111,12 +108,11 @@ class LocationDataOperations(val context: Context)
         val client:SettingsClient = LocationServices.getSettingsClient(context.applicationContext)
         val task: Task<LocationSettingsResponse> = client.
             checkLocationSettings(builder.build())
+        //TODO
         task.addOnSuccessListener { locationSettingsResponse ->
             //Get locationrequest here.
-            Log.i("LocationGoogle","Settings success")
         }
         task.addOnFailureListener { exception ->
-            Log.i("LocationGoogle","Settings failed")
             /*
             try {
             // Show the dialog by calling startResolutionForResult(),
@@ -136,7 +132,6 @@ class LocationDataOperations(val context: Context)
             override fun onLocationResult(locationResult: LocationResult?) {
                 locationResult ?: return
                 for(location in locationResult.locations){
-                    Log.i("LocationGoogle","${location.longitude} + ${location.latitude}")
                     multipleEventsListener.multipleLocationSuccess(location)
                 }
             }
@@ -167,7 +162,6 @@ class LocationDataOperations(val context: Context)
             override fun onLocationResult(locationResult: LocationResult?) {
                 locationResult ?: return
                 for(location in locationResult.locations){
-                    Log.i("LocationGoogle","${location.longitude} + ${location.latitude}")
                     singleEventsListener.mySingleLocationSuccess(location)
                 }
             }
@@ -212,7 +206,6 @@ class LocationDataOperations(val context: Context)
     {
         val locationManager = getLocationManager(locationListener)
 
-        Log.i("LocationSlow","I get locationManager now i requestsingleUpdate")
         locationManager.requestSingleUpdate(
             LocationManager.GPS_PROVIDER,
             locationListener,

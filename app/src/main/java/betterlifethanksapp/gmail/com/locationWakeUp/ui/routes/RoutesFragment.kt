@@ -2,7 +2,6 @@ package betterlifethanksapp.gmail.com.locationWakeUp.ui.routes
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -30,7 +29,6 @@ class RoutesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Log.i("state","CreateView")
         viewModel = ViewModelProviders.of(this).get(RoutesViewModel::class.java)
         sharedModel.destinationLocation.observe(viewLifecycleOwner,Observer<String>{
                 destinationLocation->
@@ -51,10 +49,5 @@ class RoutesFragment : Fragment() {
         return rootView
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        Log.i("state","ActivityCreated")
-        super.onActivityCreated(savedInstanceState)
-
-    }
 
 }

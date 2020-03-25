@@ -7,7 +7,6 @@ import android.content.Context
 import android.content.Intent
 import android.media.RingtoneManager
 import android.renderscript.RenderScript
-import android.util.Log
 import androidx.core.app.NotificationCompat
 
 class NotificationWakeUpService: IntentService("NotificationWakeUpService") {
@@ -20,7 +19,6 @@ class NotificationWakeUpService: IntentService("NotificationWakeUpService") {
 
     override fun onHandleIntent(intent: Intent?) {
         val text = intent?.getStringExtra(MESSAGE())
-        Log.i("Intent","$text")
         if (text != null) {
             createNotification(text)
         }

@@ -3,7 +3,6 @@ package betterlifethanksapp.gmail.com.locationWakeUp.data.location
 import android.location.Location
 import android.location.LocationListener
 import android.os.Bundle
-import android.util.Log
 
 
 class CurrentSingleLocationListener(val locationEventsListener: LocationEventsListener):LocationListener {
@@ -13,7 +12,6 @@ class CurrentSingleLocationListener(val locationEventsListener: LocationEventsLi
         //val locationListener:LocationEventsListener = CurrentRouteViewModel albo CurrentRouteRepository
         //locationListener.getCurrentLocation(location)
         val test1 = location!!.latitude
-        Log.i("LocationSlow","$test1")
         // LocationDataHelper.myLocationSuccess by interface
         locationEventsListener.mySingleLocationSuccess(location)
     }
