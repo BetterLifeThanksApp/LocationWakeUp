@@ -8,9 +8,11 @@ import android.util.AndroidException
 import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
+import androidx.preference.PreferenceManager
 import betterlifethanksapp.gmail.com.locationWakeUp.data.db.LocationDao
 import betterlifethanksapp.gmail.com.locationWakeUp.data.db.LocationRoomDatabase
 import betterlifethanksapp.gmail.com.locationWakeUp.data.location.*
+import betterlifethanksapp.gmail.com.locationWakeUp.data.unit.PreferencesOperations
 import betterlifethanksapp.gmail.com.locationWakeUp.data.unit.Unit
 import betterlifethanksapp.gmail.com.locationWakeUp.data.unit.UnitSettings
 import kotlinx.coroutines.launch
@@ -64,7 +66,7 @@ class CurrentRouteViewModel(application: Application)
             get() = _wakeUpMode
     //TODO You should create button to cancel wakeUpMode
 
-    private var unitsName:String="km"
+    private var unitsName:String=""
 
 
 
@@ -87,15 +89,8 @@ class CurrentRouteViewModel(application: Application)
 
     fun onButtonClicked(text:String?){
 
-        //1.Check location permission and check is turn on/off
-        //2.Notify fragment if turn off or if you don't let permisson yet.
-        //3.Check internet permission and check is turn on/off
-        //4.Notify fragment
-        //repo.checkLocation
-        //repo.checkInternet
-        //repo.checkDistance
-        //TODO this works only if i use this fragment(becauce I use thisFragmentViewModelScope
-            //TODO I can click in button 2 times(if i click fast) and I see 2x dialogBox :(
+            getUnitsFromPreference()
+
             viewModelScope.launch {
                 _buttonEnabled.value=false
                 _isProgressBarVisible.value = true
@@ -121,9 +116,19 @@ class CurrentRouteViewModel(application: Application)
                 }
             }
 
-
-        //_dialogInterfaceText.value = "Odległość od miejsca to $distance km\nUstawić budzik?"
     }
+
+    private fun getUnitsFromPreference() {
+
+        val name = repository.getUnitPreference()
+        val prefOperations = PreferencesOperations()
+        name?.let {
+            val unitEnumType = prefOperations.getUnitEnumType(it)
+            onUnitChanged(unitEnumType)
+        }
+    }
+
+
 
 
     fun setAlarmClockWithLocation(locationName:String)

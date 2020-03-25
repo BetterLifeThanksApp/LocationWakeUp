@@ -32,6 +32,7 @@ class SettingsFragment : PreferenceFragmentCompat(),SharedPreferences.OnSharedPr
 
     private val sharedViewModel:UnitSettingsViewModel by activityViewModels()
     private lateinit var viewModel: SettingsViewModel
+
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.preferences,rootKey)
     }

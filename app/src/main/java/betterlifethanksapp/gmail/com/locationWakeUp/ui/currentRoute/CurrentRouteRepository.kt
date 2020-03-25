@@ -33,22 +33,11 @@ class CurrentRouteRepository(val context: Context,
         get() = _distance
 
     init {
-        getUnitsFromPreference()
         //TODO send context.applicationContext and change variable into LoationDataOperation(don't use context.applicationContext in DataOperation class because i send context.applicationContext so use just context)
         ldh = LocationDataHelper(ldo,this)
         internetConnect = InternetConnect()
     }
 
-    private fun getUnitsFromPreference() {
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context.applicationContext)
-        val name = sharedPreferences.getString("UNIT_SYSTEM","KM")
-        val prefOperations = PreferencesOperations()
-        name?.let {
-            val unitEnumType = prefOperations.getUnitEnumType(it)
-            val unitSettings = UnitSettings(unitEnumType)
-            onUnitChanged(unitSettings.multiplierUnit)
-        }
-    }
 
 
     suspend fun getDistenceInfo(text:String)
@@ -107,5 +96,10 @@ class CurrentRouteRepository(val context: Context,
 
     fun onUnitChanged(multiplierUnit: Float) {
         ldo.multiplierUnit= multiplierUnit
+    }
+
+    fun getUnitPreference():String?{
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context.applicationContext)
+        return sharedPreferences.getString("UNIT_SYSTEM","KM")
     }
 }
