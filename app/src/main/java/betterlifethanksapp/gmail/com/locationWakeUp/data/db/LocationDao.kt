@@ -9,7 +9,7 @@ interface LocationDao {
     @Query("SELECT * from location_table WHERE locationName=:locationN LIMIT 1")
     fun getLocation(locationN:String):Location
 
-    @Insert(onConflict = OnConflictStrategy.ABORT)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(location:Location)
 
     @Delete
