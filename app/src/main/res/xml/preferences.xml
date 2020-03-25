@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory
         android:title="Units">
@@ -8,7 +9,8 @@
             android:title="Unit system"
             android:defaultValue="KM"
             android:entries="@array/unitSystemEntries"
-            android:entryValues="@array/unitSystemValues"/>
+            android:entryValues="@array/unitSystemValues"
+            app:useSimpleSummaryProvider="true"/>
     </PreferenceCategory>
 
 </PreferenceScreen>
