@@ -9,6 +9,7 @@ import android.location.LocationListener
 import android.os.Looper
 import android.util.AndroidException
 import androidx.core.content.ContextCompat
+import betterlifethanksapp.gmail.com.locationWakeUp.R
 import betterlifethanksapp.gmail.com.locationWakeUp.ui.currentRoute.CurrentRouteFragment
 import com.google.android.gms.location.*
 import com.google.android.gms.tasks.Task
@@ -50,7 +51,7 @@ class LocationDataOperations(val context: Context)
                     permission2) != PackageManager.PERMISSION_GRANTED)
         )
         {
-            throw AndroidException("No permission granted!")
+            throw AndroidException(context.applicationContext.getString(R.string.no_permission_granted))
         }
 
     }
@@ -83,7 +84,7 @@ class LocationDataOperations(val context: Context)
         {
             when(e){
                 is IllegalArgumentException,is IOException ->{
-                    throw IOException("I couldn't find destination address:(\nPlease try enter correct location\ncheck internet connection\n and click again to button")
+                    throw IOException(context.getString(R.string.no_find_destination_address))
                 }
 
             }

@@ -15,4 +15,6 @@
     <string name="turn_on_location">Turn on location please :)\nAnd again click button ;)</string>
     <string name="please_grant">Please click again to button\n…and choose grant permission :)</string>
     <string name="distance_info">You\'re from destination %1$s %2$s</string>
+    <string name="no_find_destination_address">I couldn\'t find destination address:(\nPlease try enter correct location\ncheck internet connection\nand click again to button\n or restart app</string>
+    <string name="no_permission_granted">No permission granted!</string>
 </resources>
