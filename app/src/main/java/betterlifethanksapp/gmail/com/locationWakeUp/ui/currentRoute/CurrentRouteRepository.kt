@@ -6,6 +6,7 @@ import android.location.Location
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.preference.PreferenceManager
 import betterlifethanksapp.gmail.com.locationWakeUp.data.db.LocationDao
 import betterlifethanksapp.gmail.com.locationWakeUp.data.internet.InternetConnect
 import betterlifethanksapp.gmail.com.locationWakeUp.data.internet.InternetConnectI
@@ -13,6 +14,8 @@ import betterlifethanksapp.gmail.com.locationWakeUp.data.location.LocationDataHe
 import betterlifethanksapp.gmail.com.locationWakeUp.data.location.LocationDataOperations
 import betterlifethanksapp.gmail.com.locationWakeUp.data.location.LocationEventsListener
 import betterlifethanksapp.gmail.com.locationWakeUp.data.services.NotificationWakeUpService
+import betterlifethanksapp.gmail.com.locationWakeUp.data.unit.PreferencesOperations
+import betterlifethanksapp.gmail.com.locationWakeUp.data.unit.UnitSettings
 import kotlinx.coroutines.coroutineScope
 import java.net.UnknownHostException
 
@@ -30,11 +33,22 @@ class CurrentRouteRepository(val context: Context,
         get() = _distance
 
     init {
+        getUnitsFromPreference()
         //TODO send context.applicationContext and change variable into LoationDataOperation(don't use context.applicationContext in DataOperation class because i send context.applicationContext so use just context)
         ldh = LocationDataHelper(ldo,this)
         internetConnect = InternetConnect()
     }
 
+    private fun getUnitsFromPreference() {
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context.applicationContext)
+        val name = sharedPreferences.getString("UNIT_SYSTEM","KM")
+        val prefOperations = PreferencesOperations()
+        name?.let {
+            val unitEnumType = prefOperations.getUnitEnumType(it)
+            val unitSettings = UnitSettings(unitEnumType)
+            onUnitChanged(unitSettings.multiplierUnit)
+        }
+    }
 
 
     suspend fun getDistenceInfo(text:String)
@@ -89,5 +103,9 @@ class CurrentRouteRepository(val context: Context,
         //check if locationName is in database
         //if not exist insert into db
         //dao.insert(locationName)
+    }
+
+    fun onUnitChanged(multiplierUnit: Float) {
+        ldo.multiplierUnit= multiplierUnit
     }
 }

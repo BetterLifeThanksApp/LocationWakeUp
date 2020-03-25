@@ -24,6 +24,7 @@ import betterlifethanksapp.gmail.com.locationWakeUp.R
 import betterlifethanksapp.gmail.com.locationWakeUp.data.location.DistanceSuccess
 import betterlifethanksapp.gmail.com.locationWakeUp.data.location.LocationDataHelper
 import betterlifethanksapp.gmail.com.locationWakeUp.sharedViewModel.DestinationLocationViewModel
+import betterlifethanksapp.gmail.com.locationWakeUp.sharedViewModel.UnitSettingsViewModel
 import betterlifethanksapp.gmail.com.locationWakeUp.ui.MainActivity
 import kotlinx.android.synthetic.main.current_route_fragment.*
 import kotlinx.android.synthetic.main.current_route_fragment.view.*
@@ -41,6 +42,7 @@ class CurrentRouteFragment : Fragment(){
 
     private lateinit var viewModel: CurrentRouteViewModel
     private val sharedViewModel:DestinationLocationViewModel by activityViewModels()
+    private val sharedUnitViewModel:UnitSettingsViewModel by activityViewModels()
 
 
     override fun onCreateView(
@@ -125,6 +127,10 @@ class CurrentRouteFragment : Fragment(){
                 sharedViewModel.setDestination("no destination")
                 backToStandardView()
             }
+        })
+
+        sharedUnitViewModel.currentUnit.observe(viewLifecycleOwner, Observer { unit->
+            viewModel.onUnitChanged(unit)
         })
 
         //TODO Maybe add alert to inform that app use location,internet and notification,so make sure that your notification sound,location and internet is on ;)
