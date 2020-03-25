@@ -3,12 +3,14 @@ package betterlifethanksapp.gmail.com.locationWakeUp.ui.currentRoute
 
 import android.Manifest
 import android.app.Application
+import android.content.Context
 import android.content.pm.PackageManager
 import android.util.AndroidException
 import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
 import androidx.preference.PreferenceManager
+import betterlifethanksapp.gmail.com.locationWakeUp.R
 import betterlifethanksapp.gmail.com.locationWakeUp.data.db.LocationDao
 import betterlifethanksapp.gmail.com.locationWakeUp.data.db.LocationRoomDatabase
 import betterlifethanksapp.gmail.com.locationWakeUp.data.location.*
@@ -150,7 +152,7 @@ class CurrentRouteViewModel(application: Application)
         repository.distance.observeForever { distance->
             val df = DecimalFormat("#.#")
             df.roundingMode = RoundingMode.CEILING
-            _textView.value = "You're from destination ${df.format(distance)} $unitsName"
+            _textView.value = getAppContext().getString(R.string.distance_info,df.format(distance),unitsName)
         }
     }
 
@@ -173,7 +175,7 @@ class CurrentRouteViewModel(application: Application)
             REQUEST_CODE->{
                 if(grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED)
                 {
-                    _toastMessage.value = "Proszę ponownie kliknąć na przycisk\n ...i kliknąć zezwól :)"
+                    _toastMessage.value = getAppContext().getString(R.string.turn_on_location)
                 }
                 else
                 {
@@ -187,12 +189,12 @@ class CurrentRouteViewModel(application: Application)
 
     override fun successSingleLocation(distance:Float){
         val tempInt:Int = distance.toInt()
-        _dialogInterfaceText.value = "Distance in straight line is around $tempInt $unitsName\nSet up alarm clock?"
+        _dialogInterfaceText.value = getAppContext().getString(R.string.dialog_text,tempInt,unitsName)
         _isProgressBarVisible.value = false
     }
 
     override fun failedSingleLocation() {
-        _toastMessage.value = "Turn on location please :)\nAnd again click button ;)"
+        _toastMessage.value = getAppContext().getString(R.string.turn_on_location)
         enableButtonDisableProgressBar()
     }
 
@@ -214,6 +216,11 @@ class CurrentRouteViewModel(application: Application)
         val unitSettings = UnitSettings(unit)
         unitsName = unitSettings.unitName
         repository.onUnitChanged(unitSettings.multiplierUnit)
+    }
+
+    private fun getAppContext(): Context {
+        val context = getApplication() as Context
+        return context.applicationContext
     }
 
 }

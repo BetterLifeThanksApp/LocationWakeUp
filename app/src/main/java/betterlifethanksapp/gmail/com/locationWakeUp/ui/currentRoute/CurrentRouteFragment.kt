@@ -56,17 +56,17 @@ class CurrentRouteFragment : Fragment(){
             text?.let {
                 val dialogBuilder = AlertDialog.Builder(v.context)
                     .setCancelable(false)
-                    .setPositiveButton("Tak",DialogInterface.OnClickListener{
+                    .setPositiveButton(getString(R.string.yes),DialogInterface.OnClickListener{
                             dialog,id ->
                         sharedViewModel.setDestination(etWhere.text.toString())
                         viewModel.setAlarmClockWithLocation(etWhere.text.toString())
                     })
-                    .setNegativeButton("NIE",DialogInterface.OnClickListener {
+                    .setNegativeButton(getString(R.string.no),DialogInterface.OnClickListener {
                             dialog, which -> Toast.makeText(context,"NEIN",Toast.LENGTH_SHORT).show()
                             viewModel.enableButtonDisableProgressBar()
                     })
                 val alert = dialogBuilder.create()
-                alert.setTitle("Did you agree?")
+                alert.setTitle(getString(R.string.did_u_agree))
                 alert.setMessage(text)
                 alert.show()
 
@@ -124,7 +124,7 @@ class CurrentRouteFragment : Fragment(){
             }
             else
             {
-                sharedViewModel.setDestination("no destination")
+                sharedViewModel.setDestination(getString(R.string.no_destination))
                 backToStandardView()
             }
         })

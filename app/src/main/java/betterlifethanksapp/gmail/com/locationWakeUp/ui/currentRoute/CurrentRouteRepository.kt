@@ -7,6 +7,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.preference.PreferenceManager
+import betterlifethanksapp.gmail.com.locationWakeUp.R
 import betterlifethanksapp.gmail.com.locationWakeUp.data.db.LocationDao
 import betterlifethanksapp.gmail.com.locationWakeUp.data.internet.InternetConnect
 import betterlifethanksapp.gmail.com.locationWakeUp.data.internet.InternetConnectI
@@ -74,7 +75,7 @@ class CurrentRouteRepository(val context: Context,
 
     private fun wakeUpNow() {
         val intent = Intent(context.applicationContext,NotificationWakeUpService::class.java)
-        intent.putExtra(NotificationWakeUpService.MESSAGE(),"WSTAWEJ NIE UDAWEJ")
+        intent.putExtra(NotificationWakeUpService.MESSAGE(),context.applicationContext.getString(R.string.wake_up))
         context.applicationContext.startService(intent)
         Log.i("Wake up","WAKE UP")
 
