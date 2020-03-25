@@ -14,6 +14,8 @@ import betterlifethanksapp.gmail.com.locationWakeUp.data.location.LocationDataHe
 import betterlifethanksapp.gmail.com.locationWakeUp.data.location.LocationDataOperations
 import betterlifethanksapp.gmail.com.locationWakeUp.data.location.LocationEventsListener
 import betterlifethanksapp.gmail.com.locationWakeUp.data.services.NotificationWakeUpService
+import betterlifethanksapp.gmail.com.locationWakeUp.data.unit.PreferencesOperations
+import betterlifethanksapp.gmail.com.locationWakeUp.data.unit.UnitSettings
 import kotlinx.coroutines.coroutineScope
 import java.net.UnknownHostException
 
@@ -39,8 +41,13 @@ class CurrentRouteRepository(val context: Context,
 
     private fun getUnitsFromPreference() {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context.applicationContext)
-        val name = sharedPreferences.getString("UNIT_SYSTEM","")
-        Log.i("valuesPreferences","$name tak")
+        val name = sharedPreferences.getString("UNIT_SYSTEM","KM")
+        val prefOperations = PreferencesOperations()
+        name?.let {
+            val unitEnumType = prefOperations.getUnitEnumType(it)
+            val unitSettings = UnitSettings(unitEnumType)
+            onUnitChanged(unitSettings.multiplierUnit)
+        }
     }
 
 
@@ -96,5 +103,9 @@ class CurrentRouteRepository(val context: Context,
         //check if locationName is in database
         //if not exist insert into db
         //dao.insert(locationName)
+    }
+
+    fun onUnitChanged(multiplierUnit: Float) {
+        ldo.multiplierUnit= multiplierUnit
     }
 }

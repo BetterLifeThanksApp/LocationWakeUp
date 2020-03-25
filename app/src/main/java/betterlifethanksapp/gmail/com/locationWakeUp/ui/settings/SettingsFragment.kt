@@ -8,10 +8,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 
 import betterlifethanksapp.gmail.com.locationWakeUp.R
+import betterlifethanksapp.gmail.com.locationWakeUp.data.unit.PreferencesOperations
+import betterlifethanksapp.gmail.com.locationWakeUp.data.unit.Unit
+import betterlifethanksapp.gmail.com.locationWakeUp.sharedViewModel.UnitSettingsViewModel
 
 class SettingsFragment : PreferenceFragmentCompat(),SharedPreferences.OnSharedPreferenceChangeListener {
 
@@ -21,10 +25,12 @@ class SettingsFragment : PreferenceFragmentCompat(),SharedPreferences.OnSharedPr
         onSharedPreferenceChanged(sharedPreferences,key)
     }
 
+
     companion object {
         fun newInstance() = SettingsFragment()
     }
 
+    private val sharedViewModel:UnitSettingsViewModel by activityViewModels()
     private lateinit var viewModel: SettingsViewModel
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.preferences,rootKey)
@@ -37,6 +43,11 @@ class SettingsFragment : PreferenceFragmentCompat(),SharedPreferences.OnSharedPr
         {
             val result = sharedPreferences?.getString(key,"KM")
             Log.i("valuesPreferences","$result")
+            result?.let {
+                val operations = PreferencesOperations()
+                val unitEnumType = operations.getUnitEnumType(result)
+                sharedViewModel.setcurrentUnit(unitEnumType)
+            }
         }
 
     }

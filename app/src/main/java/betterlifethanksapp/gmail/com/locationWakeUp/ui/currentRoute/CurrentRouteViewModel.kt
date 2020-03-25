@@ -11,6 +11,8 @@ import androidx.lifecycle.*
 import betterlifethanksapp.gmail.com.locationWakeUp.data.db.LocationDao
 import betterlifethanksapp.gmail.com.locationWakeUp.data.db.LocationRoomDatabase
 import betterlifethanksapp.gmail.com.locationWakeUp.data.location.*
+import betterlifethanksapp.gmail.com.locationWakeUp.data.unit.Unit
+import betterlifethanksapp.gmail.com.locationWakeUp.data.unit.UnitSettings
 import kotlinx.coroutines.launch
 import java.lang.Exception
 import java.math.RoundingMode
@@ -61,6 +63,8 @@ class CurrentRouteViewModel(application: Application)
     val wakeUpMode:LiveData<Boolean>
             get() = _wakeUpMode
     //TODO You should create button to cancel wakeUpMode
+
+    private var unitsName:String="km"
 
 
 
@@ -141,7 +145,7 @@ class CurrentRouteViewModel(application: Application)
         repository.distance.observeForever { distance->
             val df = DecimalFormat("#.#")
             df.roundingMode = RoundingMode.CEILING
-            _textView.value = "You're from destination ${df.format(distance)} km"
+            _textView.value = "You're from destination ${df.format(distance)} $unitsName"
         }
     }
 
@@ -178,7 +182,7 @@ class CurrentRouteViewModel(application: Application)
 
     override fun successSingleLocation(distance:Float){
         val tempInt:Int = distance.toInt()
-        _dialogInterfaceText.value = "Distance in straight line is around $tempInt km\nSet up alarm clock?"
+        _dialogInterfaceText.value = "Distance in straight line is around $tempInt $unitsName\nSet up alarm clock?"
         _isProgressBarVisible.value = false
     }
 
@@ -199,6 +203,12 @@ class CurrentRouteViewModel(application: Application)
     private fun resetViewValues() {
         _toastMessage.value=null
         _dialogInterfaceText.value=null
+    }
+
+    fun onUnitChanged(unit:Unit) {
+        val unitSettings = UnitSettings(unit)
+        unitsName = unitSettings.unitName
+        repository.onUnitChanged(unitSettings.multiplierUnit)
     }
 
 }
