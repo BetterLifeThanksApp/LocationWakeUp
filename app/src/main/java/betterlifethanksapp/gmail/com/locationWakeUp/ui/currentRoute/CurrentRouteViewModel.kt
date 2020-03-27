@@ -7,17 +7,17 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.util.AndroidException
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.*
-import androidx.preference.PreferenceManager
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import betterlifethanksapp.gmail.com.locationWakeUp.R
-import betterlifethanksapp.gmail.com.locationWakeUp.data.db.LocationDao
 import betterlifethanksapp.gmail.com.locationWakeUp.data.db.LocationRoomDatabase
-import betterlifethanksapp.gmail.com.locationWakeUp.data.location.*
+import betterlifethanksapp.gmail.com.locationWakeUp.data.location.LocationEventsListener
 import betterlifethanksapp.gmail.com.locationWakeUp.data.unit.PreferencesOperations
 import betterlifethanksapp.gmail.com.locationWakeUp.data.unit.Unit
 import betterlifethanksapp.gmail.com.locationWakeUp.data.unit.UnitSettings
 import kotlinx.coroutines.launch
-import java.lang.Exception
 import java.math.RoundingMode
 import java.net.UnknownHostException
 import java.text.DecimalFormat
@@ -81,9 +81,6 @@ class CurrentRouteViewModel(application: Application)
         _permissionGranted.value = true
         val locationDao = LocationRoomDatabase.getDatabase(application).locationDao()
         repository = CurrentRouteRepository(application,this,locationDao)
-        //val ll = CurrentSingleLocationListener(this)
-        //1.Create location references
-        //2.Create Repository references with location ref in constructor
     }
 
 

@@ -1,11 +1,8 @@
 package betterlifethanksapp.gmail.com.locationWakeUp.ui.currentRoute
 
-import android.Manifest
 import android.content.DialogInterface
-import android.content.Intent
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.provider.Settings
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,21 +11,14 @@ import android.view.ViewGroup
 
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.core.app.ActivityCompat
-import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 
 import betterlifethanksapp.gmail.com.locationWakeUp.R
-import betterlifethanksapp.gmail.com.locationWakeUp.data.location.DistanceSuccess
-import betterlifethanksapp.gmail.com.locationWakeUp.data.location.LocationDataHelper
 import betterlifethanksapp.gmail.com.locationWakeUp.sharedViewModel.DestinationLocationViewModel
 import betterlifethanksapp.gmail.com.locationWakeUp.sharedViewModel.UnitSettingsViewModel
-import betterlifethanksapp.gmail.com.locationWakeUp.ui.MainActivity
 import kotlinx.android.synthetic.main.current_route_fragment.*
 import kotlinx.android.synthetic.main.current_route_fragment.view.*
-import java.math.RoundingMode
-import java.text.DecimalFormat
 
 class CurrentRouteFragment : Fragment(){
 
@@ -130,9 +120,6 @@ class CurrentRouteFragment : Fragment(){
             viewModel.onUnitChanged(unit)
         })
 
-        //Set observer internet and location checked.
-        //if something wrong,display appropriate message.
-        //getDistenceInfo()
         return v
     }
 

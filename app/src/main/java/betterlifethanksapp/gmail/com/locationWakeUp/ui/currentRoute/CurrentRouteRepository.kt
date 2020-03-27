@@ -2,22 +2,16 @@ package betterlifethanksapp.gmail.com.locationWakeUp.ui.currentRoute
 
 import android.content.Context
 import android.content.Intent
-import android.location.Location
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.preference.PreferenceManager
 import betterlifethanksapp.gmail.com.locationWakeUp.R
 import betterlifethanksapp.gmail.com.locationWakeUp.data.db.LocationDao
 import betterlifethanksapp.gmail.com.locationWakeUp.data.internet.InternetConnect
-import betterlifethanksapp.gmail.com.locationWakeUp.data.internet.InternetConnectI
 import betterlifethanksapp.gmail.com.locationWakeUp.data.location.LocationDataHelper
 import betterlifethanksapp.gmail.com.locationWakeUp.data.location.LocationDataOperations
 import betterlifethanksapp.gmail.com.locationWakeUp.data.location.LocationEventsListener
 import betterlifethanksapp.gmail.com.locationWakeUp.data.services.NotificationWakeUpService
-import betterlifethanksapp.gmail.com.locationWakeUp.data.unit.PreferencesOperations
-import betterlifethanksapp.gmail.com.locationWakeUp.data.unit.UnitSettings
-import kotlinx.coroutines.coroutineScope
-import java.net.UnknownHostException
 
 class CurrentRouteRepository(val context: Context,
                              private val callbackListener:LocationEventsListener.OnFinishedLocationSingleOperations.OnFinishedSingleLocationVm,
@@ -82,11 +76,6 @@ class CurrentRouteRepository(val context: Context,
     suspend fun insertIfNotExist(locationName: String) {
         val location = betterlifethanksapp.gmail.com.locationWakeUp.data.db.Location(locationName)
         locationDao.insert(location)
-        //check if database(db) exist
-        //if not exist,create
-        //check if locationName is in database
-        //if not exist insert into db
-        //dao.insert(locationName)
     }
 
     fun onUnitChanged(multiplierUnit: Float) {

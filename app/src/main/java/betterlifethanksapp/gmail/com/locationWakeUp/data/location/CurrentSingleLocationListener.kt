@@ -9,8 +9,7 @@ class CurrentSingleLocationListener(val locationEventsListener: LocationEventsLi
     override fun onLocationChanged(location: Location?) {
         //we have our location.It's time to notify some listener.
         //And this listener should run
-        //val locationListener:LocationEventsListener = CurrentRouteViewModel albo CurrentRouteRepository
-        //locationListener.getCurrentLocation(location)
+
         val test1 = location!!.latitude
         // LocationDataHelper.myLocationSuccess by interface
         locationEventsListener.mySingleLocationSuccess(location)
