@@ -81,9 +81,6 @@ class CurrentRouteViewModel(application: Application)
         _permissionGranted.value = true
         val locationDao = LocationRoomDatabase.getDatabase(application).locationDao()
         repository = CurrentRouteRepository(application,this,locationDao)
-        //val ll = CurrentSingleLocationListener(this)
-        //1.Create location references
-        //2.Create Repository references with location ref in constructor
     }
 
 

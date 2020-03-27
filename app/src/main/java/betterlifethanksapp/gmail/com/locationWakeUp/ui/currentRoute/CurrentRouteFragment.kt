@@ -130,9 +130,6 @@ class CurrentRouteFragment : Fragment(){
             viewModel.onUnitChanged(unit)
         })
 
-        //Set observer internet and location checked.
-        //if something wrong,display appropriate message.
-        //getDistenceInfo()
         return v
     }
 

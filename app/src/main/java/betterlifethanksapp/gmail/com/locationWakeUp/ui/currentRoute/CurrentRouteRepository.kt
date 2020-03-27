@@ -82,11 +82,6 @@ class CurrentRouteRepository(val context: Context,
     suspend fun insertIfNotExist(locationName: String) {
         val location = betterlifethanksapp.gmail.com.locationWakeUp.data.db.Location(locationName)
         locationDao.insert(location)
-        //check if database(db) exist
-        //if not exist,create
-        //check if locationName is in database
-        //if not exist insert into db
-        //dao.insert(locationName)
     }
 
     fun onUnitChanged(multiplierUnit: Float) {

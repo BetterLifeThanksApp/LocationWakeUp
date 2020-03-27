@@ -40,7 +40,6 @@ class LocationDataOperations(val context: Context)
 
     suspend fun checkPermissionCorrect(permission1:String,permission2:String) = withContext(Dispatchers.IO){
 
-        //ALWAYS USE context.applicationContext because 'context' don't work.
         if(
             (ContextCompat.checkSelfPermission
                 (context.applicationContext,
@@ -178,30 +177,6 @@ class LocationDataOperations(val context: Context)
     }
 
 
-
-
-
-    /*
-    @SuppressLint("MissingPermission")//add permission later
-    fun getMyLocation(locationListener:LocationListener){
-        val locationManager = getLocationManager(locationListener)
-        // 'Location' should't be return here.It should notify other method uses listener in CurrentSingleLocationListener class
-        //val provider = locationManager.getBestProvider(Criteria(),true)
-        //locationManager.requestSingleUpdate(provider,CurrentSingleLocationListener(),null)
-        val locationPermission = LocationPermission(activity)
-        if(locationPermission.isPermissionGranted()) {
-            locationManager.requestSingleUpdate(
-                LocationManager.GPS_PROVIDER,
-                locationListener,
-                null
-            )
-       }
-        else{
-            locationPermission.requestPermission(REQUEST_CODE)
-        }
-    }
-     */
-
     @SuppressLint("MissingPermission")
     fun getMySingleLocation(locationListener: LocationListener)
     {
@@ -214,33 +189,6 @@ class LocationDataOperations(val context: Context)
         )
     }
 
-/*
-    fun onRequestPermissionResult(requestCode: Int,
-                                  permissions: Array<out String>,
-                                  grantResults: IntArray){
-        val locationPermission = LocationPermission(activity)
-        when(requestCode){
-            REQUEST_CODE->{
-                if(locationPermission.isPermissionGranted(grantResults)){
-                    // run again all proccess(get location from edittextget and find longitude,latitude  and find my location etc..
-                    //val ldh = LocationDataHelper(context,"Zlota 44,Warsaw") // It's only for testing,don't use this code
-                    //ldh.getDistanceInfo()
-                    val siema="przyznane więc jest git"
-                    Log.i("Permission","granted")
-                    val cu = CurrentRouteFragment()
-                    cu.getDistenceInfo()
-                }
-                else
-                {
-                    //e.g. display some notification which warning you to turn on 'location' or go to settings
-                    val siema="nieprzyznane wiec zrob cos"
-                    Log.i("Permission","denied")
-                }
-            }
-        }
-
-    }
-*/
 
 
 

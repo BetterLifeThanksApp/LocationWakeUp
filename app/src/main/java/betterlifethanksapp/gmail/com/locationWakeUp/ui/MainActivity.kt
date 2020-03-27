@@ -60,17 +60,6 @@ class MainActivity : AppCompatActivity() {
         super.onBackPressed()
         navController.popBackStack(R.id.currentRouteFragment,false)
     }
-/*
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        //val ldh = LocationDataOperations(this)
-        //ldh.onRequestPermissionResult(requestCode,permissions,grantResults)
-        //TODO Maybe run method on current use XXPermission class by uses interface
-        Log.i("Permission","onrequestPermissionResult in activity")
-    }*/
+
 
 }
