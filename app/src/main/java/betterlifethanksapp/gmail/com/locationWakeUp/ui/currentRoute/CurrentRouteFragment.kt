@@ -52,7 +52,7 @@ class CurrentRouteFragment : Fragment(){
                     })
                     .setNegativeButton(getString(R.string.no),DialogInterface.OnClickListener {
                             dialog, which -> Toast.makeText(context,"NEIN",Toast.LENGTH_SHORT).show()
-                            viewModel.enableButtonDisableProgressBar()
+                            viewModel.enableButtonAndEditTextAndDisableProgressBar()
                     })
                 val alert = dialogBuilder.create()
                 alert.setTitle(getString(R.string.did_u_agree))
@@ -70,6 +70,10 @@ class CurrentRouteFragment : Fragment(){
 
         viewModel.buttonEnabled.observe(viewLifecycleOwner, Observer { state->
             button.isClickable = state
+        })
+
+        viewModel.editTextEnabled.observe(viewLifecycleOwner, Observer { state ->
+            etWhere.isEnabled = state
         })
 
         viewModel.permissionGranted.observe(viewLifecycleOwner, Observer { state ->

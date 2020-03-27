@@ -41,6 +41,12 @@ class CurrentRouteViewModel(application: Application)
     val buttonEnabled:LiveData<Boolean>
         get() = _buttonEnabled
 
+    private val _editTextEnabled = MutableLiveData<Boolean>()
+
+    val editTextEnabled:LiveData<Boolean>
+        get() = _editTextEnabled
+
+
     private val _permissionGranted = MutableLiveData<Boolean>()
 
     val permissionGranted:LiveData<Boolean>
@@ -79,6 +85,7 @@ class CurrentRouteViewModel(application: Application)
     init {
         _buttonEnabled.value = true
         _permissionGranted.value = true
+        _editTextEnabled.value = true
         val locationDao = LocationRoomDatabase.getDatabase(application).locationDao()
         repository = CurrentRouteRepository(application,this,locationDao)
     }
@@ -92,22 +99,23 @@ class CurrentRouteViewModel(application: Application)
                 _buttonEnabled.value=false
                 _isProgressBarVisible.value = true
                 _buttonClick.value = false
+                _editTextEnabled.value = false
                 try {
                     repository.getDistenceInfo(text!!)
                 }
                 catch (e: UnknownHostException){
                     _toastMessage.value =  e.message
-                    enableButtonDisableProgressBar()
+                    enableButtonAndEditTextAndDisableProgressBar()
                 }
                 catch (e: AndroidException)
                 {
                     _permissionGranted.value = false
-                    enableButtonDisableProgressBar()
+                    enableButtonAndEditTextAndDisableProgressBar()
                 }
                 catch(e:Exception)
                 {
                             _toastMessage.value = e.message
-                            enableButtonDisableProgressBar()
+                            enableButtonAndEditTextAndDisableProgressBar()
 
                 }
             }
@@ -183,12 +191,13 @@ class CurrentRouteViewModel(application: Application)
 
     override fun failedSingleLocation() {
         _toastMessage.value = getAppContext().getString(R.string.turn_on_location)
-        enableButtonDisableProgressBar()
+        enableButtonAndEditTextAndDisableProgressBar()
     }
 
-    fun enableButtonDisableProgressBar(){
+    fun enableButtonAndEditTextAndDisableProgressBar(){
         _buttonEnabled.value = true
         _isProgressBarVisible.value = false
+        _editTextEnabled.value = true
     }
 
     fun onDestroyView(){
