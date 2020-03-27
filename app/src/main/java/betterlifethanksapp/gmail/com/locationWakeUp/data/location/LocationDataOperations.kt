@@ -1,24 +1,20 @@
 package betterlifethanksapp.gmail.com.locationWakeUp.data.location
 
-import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
-import android.location.*
-import android.location.LocationListener
+import android.location.Geocoder
+import android.location.Location
+import android.location.LocationManager
 import android.os.Looper
 import android.util.AndroidException
 import androidx.core.content.ContextCompat
 import betterlifethanksapp.gmail.com.locationWakeUp.R
-import betterlifethanksapp.gmail.com.locationWakeUp.ui.currentRoute.CurrentRouteFragment
 import com.google.android.gms.location.*
 import com.google.android.gms.tasks.Task
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import java.io.IOException
-import java.lang.Exception
-import java.lang.IllegalArgumentException
 
 class LocationDataOperations(val context: Context)
 //ALWAYS USE context.applicationContext because 'context' don't work.
