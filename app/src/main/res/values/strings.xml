@@ -6,7 +6,7 @@
     <string name="current_destinaton">Current Destinaton</string>
     <string name="no_destination">no destination</string>
     <string name="how_long">How long</string>
-    <string name="find_location">Find location</string>
+    <string name="find_location_small">Find location</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="did_u_agree">Did you agree?</string>
