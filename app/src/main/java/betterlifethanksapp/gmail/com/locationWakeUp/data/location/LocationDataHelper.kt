@@ -1,7 +1,6 @@
 package betterlifethanksapp.gmail.com.locationWakeUp.data.location
 
 import android.location.Location
-import betterlifethanksapp.gmail.com.locationWakeUp.data.location.LocationPermission.Companion.PERMISSION_STRING
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
