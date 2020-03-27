@@ -1,19 +1,11 @@
 package betterlifethanksapp.gmail.com.locationWakeUp.ui.settings
 
 import android.content.SharedPreferences
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
-
 import betterlifethanksapp.gmail.com.locationWakeUp.R
 import betterlifethanksapp.gmail.com.locationWakeUp.data.unit.PreferencesOperations
-import betterlifethanksapp.gmail.com.locationWakeUp.data.unit.Unit
 import betterlifethanksapp.gmail.com.locationWakeUp.sharedViewModel.UnitSettingsViewModel
 
 class SettingsFragment : PreferenceFragmentCompat(),SharedPreferences.OnSharedPreferenceChangeListener {
