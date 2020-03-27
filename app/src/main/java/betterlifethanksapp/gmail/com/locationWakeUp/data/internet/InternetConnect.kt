@@ -1,9 +1,7 @@
 package betterlifethanksapp.gmail.com.locationWakeUp.data.internet
 
-import android.util.Log
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import java.lang.Exception
 import java.net.InetAddress
 import java.net.UnknownHostException
 
