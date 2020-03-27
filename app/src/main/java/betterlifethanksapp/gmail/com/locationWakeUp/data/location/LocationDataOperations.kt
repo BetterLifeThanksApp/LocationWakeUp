@@ -177,30 +177,6 @@ class LocationDataOperations(val context: Context)
     }
 
 
-    @SuppressLint("MissingPermission")
-    fun getMySingleLocation(locationListener: LocationListener)
-    {
-        val locationManager = getLocationManager(locationListener)
-
-        locationManager.requestSingleUpdate(
-            LocationManager.GPS_PROVIDER,
-            locationListener,
-            Looper.getMainLooper()
-        )
-    }
-
-
-
-
-    //@SuppressLint("MissingPermission")// add permission later
-    private fun getLocationManager(locationListener: LocationListener):LocationManager
-    {
-
-        return context.applicationContext.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-    }
-
-
-
     fun getDistance(myLocation: Location, destination: Location): Float = myLocation.distanceTo(destination) * multiplierUnit
 
     fun isLocationOn(): Boolean {

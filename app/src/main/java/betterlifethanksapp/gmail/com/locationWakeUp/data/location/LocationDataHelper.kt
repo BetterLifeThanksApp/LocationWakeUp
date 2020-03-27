@@ -47,10 +47,6 @@ class LocationDataHelper(private val locationDataOperations:LocationDataOperatio
     }
 
 
-    fun getDistanceInfo(text:String){
-
-    }
-
     override fun mySingleLocationSuccess(location: Location) {
         val distance = locationDataOperations.getDistance(location,destination)
         locationResult.successSingleLocation(distance)
